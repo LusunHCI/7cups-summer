@@ -1,32 +1,91 @@
-intents:
-  - greet
-  - goodbye
-  - affirm
-  - deny
-  - mood_great
-  - mood_unhappy
-  - bot_challenge
-
-responses:
-  utter_greet:
-  - text: "Hey! How are you?"
-
-  utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
-
-  utter_did_that_help:
-  - text: "Did that help you?"
-
-  utter_happy:
-  - text: "Great, carry on!"
-
-  utter_goodbye:
-  - text: "Bye"
-
-  utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
-
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
+intents:
+- greeting
+- conventional_opening
+- open_question_when
+- opinion_question
+- opinion_question_why_followup
+- opinion_question_followup
+- suggestion_letout_feelings
+- suggestion_cry
+- appreciation
+- conventional_close
+- stressor_inquiry_further_details
+- agreement
+- stressor_inquiry_time
+- stressor_inquiry_why
+- clarification
+- stressor_inquiry_feelings
+- condolence
+- sort_out problems
+- stressor_inquiry_age
+- encourage_self
+- stressor_inquiry_when
+- reflection_y
+- accompany
+- no_advice
+- comprehension_question_y
+- tip_conventional_opening
+responses:
+  utter_appreciation_close:
+  - text: It's pretty late and I should sleep before having to think about it. Thanks
+      again ! See ya!
+  utter_conventional_close:
+  - text: See you
+  utter_conventional_opening:
+  - custom:
+      data:
+      - description: So you just breakup with your boyfriend and you feel very sad.
+        title: reflect
+      - description: I'm sorry to hear that, you must be very sad right now. 
+        title: offer condolence
+      payload: collapsible
+    text: Very sad. I might not be showing it but I can feel it. And sorry if I'm
+      a little awkward, it's my first time but this 'breakup' really hit me.
+
+  utter_greeting:
+  - text: Hi there. I want to seek some help from 7cups
+  utter_open_question_when:
+  - text: Like an hour or two ago.
+  utter_opinion_question_1:
+  - text: Well, the situation is that I'm moving in a year or so and I had asked him
+      if he could do long distance. He had said no and he told me he didn't know how
+      to tell me he coudlnt. He still loves me, and I do too..but it's better to break
+      it off before we get too involved .
+  utter_opinion_question_2:
+  - text: I didn't want to leave him. I was in denial and just wanted him. He was
+      thinking straight and told me it's for the best and he wants to be friends .
+      But I don't know how I'm going to take it. I really liked him, to the point
+      to love, but losing him already hurt as bad if I lost him next year.
+  utter_opinion_question_followup:
+  - text: Just losing him. That's what is bothering me. Not bothering me, but I'm
+      just heartbroken . I really wish we could have lasted forever. I was head over
+      heels for him..and still am. It's not that I need to love someone . I loved
+      him , and now I cant. And now I'm going to be jealous because I know girls will
+      instantly want to be all over him..because he doesn't have me anymore.
+  utter_opinion_question_why_followup:
+  - text: He told me that he couldn't stand not seeing me.
+  utter_suggestion_cry_accept:
+  - text: "Yeah..I guess you are right. I'll try to open up and let out my feelings\
+      \ and see how that works out. Thank you for helping, and spending time out of\
+      \ your day to help me.(:"
+  utter_suggestion_letout_feelings_reject:
+  - text: What if I can't let out my feelings? Yes I can cry all day but I hate the
+      fact that people will ask what's wrong.
+actions:
+- utter_appreciation_close
+- utter_conventional_close
+- utter_conventional_opening
+- utter_greeting
+- utter_open_question_when
+- utter_opinion_question_1
+- utter_opinion_question_2
+- utter_opinion_question_followup
+- utter_opinion_question_why_followup
+- utter_suggestion_cry_accept
+- utter_suggestion_letout_feelings_reject
+- action_hello_world
+- action_hello_world2
+- action_my_fallback
