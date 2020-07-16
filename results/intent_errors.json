@@ -1,0 +1,18 @@
+[
+  {
+    "text": "how are you",
+    "intent": "greeting",
+    "intent_prediction": {
+      "name": "conventional_opening",
+      "confidence": 0.4145435392856598
+    }
+  },
+  {
+    "text": "So be sure that you'll always have someone for you whenever you want, that's me :)",
+    "intent": "accompany",
+    "intent_prediction": {
+      "name": "conventional_opening",
+      "confidence": 0.1995725929737091
+    }
+  }
+]

@@ -39,12 +39,11 @@ responses:
       data:
       - description: So you just breakup with your boyfriend and you feel very sad.
         title: reflect
-      - description: I'm sorry to hear that, you must be very sad right now. 
+      - description: I'm sorry to hear that, you must be very sad right now.
         title: offer condolence
       payload: collapsible
     text: Very sad. I might not be showing it but I can feel it. And sorry if I'm
       a little awkward, it's my first time but this 'breakup' really hit me.
-
   utter_greeting:
   - text: Hi there. I want to seek some help from 7cups
   utter_open_question_when:
