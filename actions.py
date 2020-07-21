@@ -16,32 +16,32 @@ from rasa_sdk.executor import CollectingDispatcher
 
 
 
-class ActionHelloWorld(Action):
+# class ActionHelloWorld(Action):
 
-    def name(self) -> Text:
-        return "action_hello_world"
+#     def name(self) -> Text:
+#         return "action_hello_world"
 
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-    	buttons=[]
-    	buttons.append({"title": "reflect", "payload": "Your boyfriend broke up with you"})
-    	buttons.append({"title": "condolences", "payload": "I'm sorry to hear that"})
-    	dispatcher.utter_message(template="utter_conventional_opening",buttons=buttons)
-    	return []
+#     def run(self, dispatcher: CollectingDispatcher,
+#             tracker: Tracker,
+#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+#     	buttons=[]
+#     	buttons.append({"title": "reflect", "payload": "Your boyfriend broke up with you"})
+#     	buttons.append({"title": "condolences", "payload": "I'm sorry to hear that"})
+#     	dispatcher.utter_message(template="utter_conventional_opening",buttons=buttons)
+#     	return []
 
-class ActionHelloWorld2(Action):
+# class ActionHelloWorld2(Action):
 
-    def name(self) -> Text:
-        return "action_hello_world2"
+#     def name(self) -> Text:
+#         return "action_hello_world2"
 
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        buttons=[]
-        buttons.append({"title": "get listening tips", "payload": "show me tips"})
-        dispatcher.utter_message(template="utter_conventional_opening",buttons=buttons)
-        return []
+#     def run(self, dispatcher: CollectingDispatcher,
+#             tracker: Tracker,
+#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+#         buttons=[]
+#         buttons.append({"title": "get listening tips", "payload": "show me tips"})
+#         dispatcher.utter_message(template="utter_conventional_opening",buttons=buttons)
+#         return []
 
 
 class ActionMyFallBack(Action):
@@ -54,6 +54,7 @@ class ActionMyFallBack(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         dispatcher.utter_message(text="Sorry I don't understand")
         return []
+
 
 # class ActionSorry(Action):
 

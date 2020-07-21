@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Raleway:500&display=swap" rel="stylesheet">
+
+<!--Import Font Awesome Icon Font-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+
+<!--Import materialize.css-->
+<link rel="stylesheet" type="text/css" href="static/css/materialize.min.css">
+
+<!--Main css-->
+<link rel="stylesheet" type="text/css" href="static/css/style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div class="card-panel z-depth-5" style="margin: 250px">
+  <div class="col s12 m12 l12 center">
+    <h>Please Input the User ID You Received</h>
+  </div>
+  <div class="col s12 m12 l12">
+    <div class="input-field">
+      <label for="userId">User id</label>
+      <input id="userId" class="userId" type="text" name="userId">
+    </div>
+  </div>
+  <div id="loginButton" class= "btn waves-effect waves-light " style="width:100%;background-color:#5a17ee;">Login</div> 
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/materialize.min.js"></script>
+<script type="text/javascript">
+  $("#loginButton").on("click", function(e) {
+    var userid = $(".userId").val();
+    userLogin(userid);
+  })
+  function userLogin(userid) {
+    $.ajax({
+      url: "/chat/%3F"+userid,
+      type: "GET",
+      contentType: "application/x-www-form-urlencoded;",
+      data: '',
+      success: function() {
+        window.location.href = '/chat/%3F'+userid;
+      }
+    });
+  }
+</script>
+</body>
+</html>
