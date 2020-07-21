@@ -163,18 +163,6 @@ function send(message) {
     var arrUrl = url.split("%3F");
     var para = arrUrl[1];
     console.log("para=", para);
-    var message_id=para+message_count.toString();
-    message_count++;
-
-    $.ajax({
-        url: "/userMessage",
-        type: "POST",
-        contentType: 'application/json;charset=UTF-8',
-        data: JSON.stringify({ 'message_id': message_id, 'message': message, 'chatroom_id': para, 'message_type': 0,'sender_id': para}),
-        success: function() {
-            console.log("message=",message, );
-        }
-    });
 
     $.ajax({
         url: "http://localhost:5005/webhooks/rest/webhook",
@@ -211,6 +199,19 @@ function send(message) {
         }
     });
 
+    message_count++;
+    var message_id=para+message_count.toString();
+
+    $.ajax({
+        url: "/userMessage",
+        type: "POST",
+        contentType: 'application/json;charset=UTF-8',
+        data: JSON.stringify({ 'message_id': message_id, 'message': message, 'chatroom_id': para, 'message_type': 0,'sender_id': para}),
+        success: function() {
+            console.log("message=",message, );
+        }
+    });
+
 }
 
 //=================== set bot response in the chats ===========================================
@@ -220,16 +221,13 @@ function setBotResponse(response) {
     var arrUrl = url.split("%3F");
     var para = arrUrl[1];
     console.log("para=", para);
-    var message_id=para+message_count.toString();
 
 
     //display bot response after 500 milliseconds
     setTimeout(function() {
         hideBotTyping();
 
-        var FeedbackResponse='<p class="feedbackMsg">' + response[0].text + '</p> <br> <div class="input-field"> <label for="userFeedback">Give feedback on this message</label> <input id="userFeedback" class="userFeedback" type="text" name="userFeedback"> </div>';
-        $(FeedbackResponse).appendTo(".feedback");
-        message_count++;
+
         if (response.length < 1) {
             //if there is no response from Rasa, send  fallback message to the user
             var fallbackMsg = "I am facing some issues, please try again later!!!";
@@ -249,6 +247,9 @@ function setBotResponse(response) {
                 if (response[i].hasOwnProperty("text")) {
                     var BotResponse = '<img class="botAvatar" src="../static/img/sara_avatar.png"/><p class="botMsg">' + response[i].text + '</p><div class="clearfix"></div>';
                     $(BotResponse).appendTo(".chats").hide().fadeIn(1000);
+                    message_count++;
+                    var FeedbackResponse='<p class="feedbackMsg">' + response[i].text + '</p> <div class="input-field"> <label for="userFeedback">Give feedback on this message</label> <input id="userFeedback ' +message_count.toString()+'class="userFeedback" type="text" name="userFeedback'+message_count.toString()+'""> </div>';
+                    $(FeedbackResponse).appendTo(".feedback");
                 }
 
                 //check if the response contains "images"
@@ -344,6 +345,7 @@ function setBotResponse(response) {
                         botmessage=data;
                     }
                 }
+                var message_id=para+message_count.toString();
                 $.ajax({
                     url: "/botResponse",
                     type: "POST",
@@ -360,7 +362,11 @@ function setBotResponse(response) {
 
 
 }
-
+//====================================== Submit Feedback ======================================
+$("#feedbackButton").on("click", function(e) {
+    var form_data = $("#feedbackForm").serialize();
+    console.log(form_data);
+})
 //====================================== Toggle chatbot =======================================
 $("#profile_div").click(function() {
     $(".profile_div").toggle();
@@ -661,10 +667,9 @@ function createCollapsible(data) {
     }
     var contents = '<ul class="collapsible">' + list + '</uL>';
     $(contents).appendTo(".chats");
-    var feedbackContents='<ul class="feedbackHint">' + hintList + '</uL> <div class="input-field">  <label for="userFeedback">Give Feedback on this hint</label> <input id="userFeedback" class="userFeedback" type="text" name="userFeedback"> </div>';
-    $(feedbackContents).appendTo(".feedback");
     message_count++;
-
+    var feedbackContents='<ul class="feedbackHint">' + hintList + '</uL> <div class="input-field">  <label for="userFeedback">Give Feedback on this hint</label> <input id="userFeedback' +message_count.toString()+' class="userFeedback" type="text" name="userFeedback'+ message_count.toString()+'"> </div>';
+    $(feedbackContents).appendTo(".feedback");
     // initialize the collapsible
     $('.collapsible').collapsible();
     scrollToBottomOfResults();
