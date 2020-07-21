@@ -27,14 +27,14 @@ def userMessage():
   		database="7cups_summer"
 		)
 		mycursor = mydb.cursor()
+		message_id=request.json['message_id']
 		chatroom_id=int(request.json['chatroom_id'])
 		message=request.json['message']
 		message_type=int(request.json['message_type'])
 		timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-		feedback=request.json['feedback']
 		sender_id=int(request.json['sender_id'])
-		sql = "INSERT INTO codesign (chatroom_id, message, message_type, timestamp, feedback, send_id) VALUES (%s, %s, %s, %s, %s, %s)"
-		val=(chatroom_id, message, message_type, timestamp, feedback, sender_id)
+		sql = "INSERT INTO codesign (message_id, chatroom_id, message, message_type, timestamp, send_id) VALUES (%s, %s, %s, %s, %s, %s)"
+		val=(message_id, chatroom_id, message, message_type, timestamp, sender_id)
 		mycursor.execute(sql,val)
 		mydb.commit()
 		mycursor.close()
@@ -55,6 +55,7 @@ def botResponse():
 		)
 		mycursor = mydb.cursor()
 		print(request.json)
+		message_id=request.json['message_id']
 		chatroom_id=int(request.json['chatroom_id'])
 		message_type=int(request.json['message_type'])
 		message=request.json['message']
@@ -65,10 +66,9 @@ def botResponse():
 			for m in message:
 				msg+=str(m)
 		timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-		feedback=request.json['feedback']
 		sender_id=int(request.json['sender_id'])
-		sql = "INSERT INTO codesign (chatroom_id, message, message_type, timestamp, feedback, send_id) VALUES (%s, %s, %s, %s, %s, %s)"
-		val=(chatroom_id, msg, message_type, timestamp, feedback, sender_id)
+		sql = "INSERT INTO codesign (message_id, chatroom_id, message, message_type, timestamp, send_id) VALUES (%s, %s, %s, %s, %s,%s)"
+		val=(message_id, chatroom_id, msg, message_type, timestamp, sender_id)
 		mycursor.execute(sql,val)
 		mydb.commit()
 		mycursor.close()

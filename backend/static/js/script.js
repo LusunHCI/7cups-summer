@@ -19,7 +19,7 @@ $(document).ready(function() {
     $('.dropdown-trigger').dropdown();
 
     //initiate the modal for displaying the charts, if you dont have charts, then you comment the below line
-    $('.modal').modal();
+    // $('.modal').modal();
 
 
 
@@ -29,7 +29,10 @@ $(document).ready(function() {
 
     //global variables
     action_name = "action_greet_user";
-    user_id = "1";
+    url = window.location.href;
+    arrUrl = url.split("%3F");
+    para = arrUrl[1];
+    message_count=0;
 
     //if you want the bot to start the conversation
     // action_trigger();
@@ -42,10 +45,10 @@ function restartConversation() {
     //destroy the existing chart
     $('.collapsible').remove();
 
-    if (typeof chatChart !== 'undefined') { chatChart.destroy(); }
+    // if (typeof chatChart !== 'undefined') { chatChart.destroy(); }
 
-    $(".chart-container").remove();
-    if (typeof modalChart !== 'undefined') { modalChart.destroy(); }
+    // $(".chart-container").remove();
+    // if (typeof modalChart !== 'undefined') { modalChart.destroy(); }
     $(".chats").html("");
     $(".usrInput").val("");
     send("/restart");
@@ -56,7 +59,7 @@ function action_trigger() {
 
     // send an event to the bot, so that bot can start the conversation by greeting the user
     $.ajax({
-        url: `http://localhost:5005/conversations/${user_id}/execute`,
+        url: `http://localhost:5005/conversations/${para}/execute`,
         type: "POST",
         contentType: "application/json",
         data: JSON.stringify({ "name": action_name, "policy": "MappingPolicy", "confidence": "0.98" }),
@@ -93,8 +96,8 @@ $(".usrInput").on("keyup keypress", function(e) {
             $('.collapsible').remove();
             if (typeof chatChart !== 'undefined') { chatChart.destroy(); }
 
-            $(".chart-container").remove();
-            if (typeof modalChart !== 'undefined') { modalChart.destroy(); }
+            // $(".chart-container").remove();
+            // if (typeof modalChart !== 'undefined') { modalChart.destroy(); }
 
 
 
@@ -116,11 +119,11 @@ $("#sendButton").on("click", function(e) {
         e.preventDefault();
         return false;
     } else {
-        //destroy the existing chart
+        // destroy the existing chart
 
-        chatChart.destroy();
-        $(".chart-container").remove();
-        if (typeof modalChart !== 'undefined') { modalChart.destroy(); }
+        // chatChart.destroy();
+        // $(".chart-container").remove();
+        // if (typeof modalChart !== 'undefined') { modalChart.destroy(); }
 
         $(".suggestions").remove();
         $("#paginated_cards").remove();
@@ -159,13 +162,15 @@ function send(message) {
     var url = window.location.href;
     var arrUrl = url.split("%3F");
     var para = arrUrl[1];
-    console.log("para=", para)
+    console.log("para=", para);
+    var message_id=para+message_count.toString();
+    message_count++;
 
     $.ajax({
         url: "/userMessage",
         type: "POST",
         contentType: 'application/json;charset=UTF-8',
-        data: JSON.stringify({ 'message': message, 'chatroom_id': para, 'message_type': 0, 'feedback': '', 'sender_id': para}),
+        data: JSON.stringify({ 'message_id': message_id, 'message': message, 'chatroom_id': para, 'message_type': 0,'sender_id': para}),
         success: function() {
             console.log("message=",message, );
         }
@@ -175,7 +180,7 @@ function send(message) {
         url: "http://localhost:5005/webhooks/rest/webhook",
         type: "POST",
         contentType: "application/json",
-        data: JSON.stringify({ message: message, sender: user_id }),
+        data: JSON.stringify({ message: message, sender: para }),
         success: function(botResponse, status) {
             console.log("Response from Rasa: ", botResponse, "\nStatus: ", status);
 
@@ -214,7 +219,8 @@ function setBotResponse(response) {
     var url = window.location.href;
     var arrUrl = url.split("%3F");
     var para = arrUrl[1];
-    console.log("para=", para)
+    console.log("para=", para);
+    var message_id=para+message_count.toString();
 
 
     //display bot response after 500 milliseconds
@@ -223,6 +229,7 @@ function setBotResponse(response) {
 
         var FeedbackResponse='<p class="feedbackMsg">' + response[0].text + '</p> <br> <div class="input-field"> <label for="userFeedback">Give feedback on this message</label> <input id="userFeedback" class="userFeedback" type="text" name="userFeedback"> </div>';
         $(FeedbackResponse).appendTo(".feedback");
+        message_count++;
         if (response.length < 1) {
             //if there is no response from Rasa, send  fallback message to the user
             var fallbackMsg = "I am facing some issues, please try again later!!!";
@@ -307,26 +314,26 @@ function setBotResponse(response) {
                         return;
                     }
 
-                    //check if the custom payload type is "chart"
-                    if (response[i].custom.payload == "chart") {
+                    // //check if the custom payload type is "chart"
+                    // if (response[i].custom.payload == "chart") {
 
-                        // sample format of the charts data:
-                        // var chartData = { "title": "Leaves", "labels": ["Sick Leave", "Casual Leave", "Earned Leave", "Flexi Leave"], "backgroundColor": ["#36a2eb", "#ffcd56", "#ff6384", "#009688", "#c45850"], "chartsData": [5, 10, 22, 3], "chartType": "pie", "displayLegend": "true" }
+                    //     // sample format of the charts data:
+                    //     // var chartData = { "title": "Leaves", "labels": ["Sick Leave", "Casual Leave", "Earned Leave", "Flexi Leave"], "backgroundColor": ["#36a2eb", "#ffcd56", "#ff6384", "#009688", "#c45850"], "chartsData": [5, 10, 22, 3], "chartType": "pie", "displayLegend": "true" }
 
-                        //store the below parameters as global variable, 
-                        // so that it can be used while displaying the charts in modal.
-                        chartData = (response[i].custom.data)
-                        title = chartData.title;
-                        labels = chartData.labels;
-                        backgroundColor = chartData.backgroundColor;
-                        chartsData = chartData.chartsData;
-                        chartType = chartData.chartType;
-                        displayLegend = chartData.displayLegend;
+                    //     //store the below parameters as global variable, 
+                    //     // so that it can be used while displaying the charts in modal.
+                    //     chartData = (response[i].custom.data)
+                    //     title = chartData.title;
+                    //     labels = chartData.labels;
+                    //     backgroundColor = chartData.backgroundColor;
+                    //     chartsData = chartData.chartsData;
+                    //     chartType = chartData.chartType;
+                    //     displayLegend = chartData.displayLegend;
 
-                        // pass the above variable to createChart function
-                        createChart(title, labels, backgroundColor, chartsData, chartType, displayLegend)
-                        return;
-                    }
+                    //     // pass the above variable to createChart function
+                    //     createChart(title, labels, backgroundColor, chartsData, chartType, displayLegend)
+                    //     return;
+                    // }
 
                     //check of the custom payload type is "collapsible"
                     if (response[i].custom.payload == "collapsible") {
@@ -341,7 +348,7 @@ function setBotResponse(response) {
                     url: "/botResponse",
                     type: "POST",
                     contentType: 'application/json;charset=UTF-8',
-                    data: JSON.stringify({ 'message': botmessage, 'chatroom_id': para, 'message_type': msg_type, 'feedback': '', 'sender_id': 0}),
+                    data: JSON.stringify({ 'message_id': message_id, 'message': botmessage, 'chatroom_id': para, 'message_type': msg_type, 'feedback': '', 'sender_id': 0}),
                     success: function() {
                         console.log("message=",botmessage);
                     }
@@ -656,6 +663,7 @@ function createCollapsible(data) {
     $(contents).appendTo(".chats");
     var feedbackContents='<ul class="feedbackHint">' + hintList + '</uL> <div class="input-field">  <label for="userFeedback">Give Feedback on this hint</label> <input id="userFeedback" class="userFeedback" type="text" name="userFeedback"> </div>';
     $(feedbackContents).appendTo(".feedback");
+    message_count++;
 
     // initialize the collapsible
     $('.collapsible').collapsible();
@@ -666,108 +674,108 @@ function createCollapsible(data) {
 //====================================== creating Charts ======================================
 
 //function to create the charts & render it to the canvas
-function createChart(title, labels, backgroundColor, chartsData, chartType, displayLegend) {
+// function createChart(title, labels, backgroundColor, chartsData, chartType, displayLegend) {
 
-    //create the ".chart-container" div that will render the charts in canvas as required by charts.js,
-    // for more info. refer: https://www.chartjs.org/docs/latest/getting-started/usage.html
-    var html = '<div class="chart-container"> <span class="modal-trigger" id="expand" title="expand" href="#modal1"><i class="fa fa-external-link" aria-hidden="true"></i></span> <canvas id="chat-chart" ></canvas> </div> <div class="clearfix"></div>'
-    $(html).appendTo('.chats');
+//     //create the ".chart-container" div that will render the charts in canvas as required by charts.js,
+//     // for more info. refer: https://www.chartjs.org/docs/latest/getting-started/usage.html
+//     var html = '<div class="chart-container"> <span class="modal-trigger" id="expand" title="expand" href="#modal1"><i class="fa fa-external-link" aria-hidden="true"></i></span> <canvas id="chat-chart" ></canvas> </div> <div class="clearfix"></div>'
+//     $(html).appendTo('.chats');
 
-    //create the context that will draw the charts over the canvas in the ".chart-container" div
-    var ctx = $('#chat-chart');
+//     //create the context that will draw the charts over the canvas in the ".chart-container" div
+//     var ctx = $('#chat-chart');
 
-    // Once you have the element or context, instantiate the chart-type by passing the configuration,
-    //for more info. refer: https://www.chartjs.org/docs/latest/configuration/
-    var data = {
-        labels: labels,
-        datasets: [{
-            label: title,
-            backgroundColor: backgroundColor,
-            data: chartsData,
-            fill: false
-        }]
-    };
-    var options = {
-        title: {
-            display: true,
-            text: title
-        },
-        layout: {
-            padding: {
-                left: 5,
-                right: 0,
-                top: 0,
-                bottom: 0
-            }
-        },
-        legend: {
-            display: displayLegend,
-            position: "right",
-            labels: {
-                boxWidth: 5,
-                fontSize: 10
-            }
-        }
-    }
+//     // Once you have the element or context, instantiate the chart-type by passing the configuration,
+//     //for more info. refer: https://www.chartjs.org/docs/latest/configuration/
+//     var data = {
+//         labels: labels,
+//         datasets: [{
+//             label: title,
+//             backgroundColor: backgroundColor,
+//             data: chartsData,
+//             fill: false
+//         }]
+//     };
+//     var options = {
+//         title: {
+//             display: true,
+//             text: title
+//         },
+//         layout: {
+//             padding: {
+//                 left: 5,
+//                 right: 0,
+//                 top: 0,
+//                 bottom: 0
+//             }
+//         },
+//         legend: {
+//             display: displayLegend,
+//             position: "right",
+//             labels: {
+//                 boxWidth: 5,
+//                 fontSize: 10
+//             }
+//         }
+//     }
 
-    //draw the chart by passing the configuration
-    chatChart = new Chart(ctx, {
-        type: chartType,
-        data: data,
-        options: options
-    });
+//     //draw the chart by passing the configuration
+//     chatChart = new Chart(ctx, {
+//         type: chartType,
+//         data: data,
+//         options: options
+//     });
 
-    scrollToBottomOfResults();
-}
+//     scrollToBottomOfResults();
+// }
 
-// on click of expand button, get the chart data from gloabl variable & render it to modal
-$(document).on("click", "#expand", function() {
+// // on click of expand button, get the chart data from gloabl variable & render it to modal
+// $(document).on("click", "#expand", function() {
 
-    //the parameters are declared gloabally while we get the charts data from rasa.
-    createChartinModal(title, labels, backgroundColor, chartsData, chartType, displayLegend)
-});
+//     //the parameters are declared gloabally while we get the charts data from rasa.
+//     createChartinModal(title, labels, backgroundColor, chartsData, chartType, displayLegend)
+// });
 
-//function to render the charts in the modal
-function createChartinModal(title, labels, backgroundColor, chartsData, chartType, displayLegend) {
-    //if you want to display the charts in modal, make sure you have configured the modal in index.html
-    //create the context that will draw the charts over the canvas in the "#modal-chart" div of the modal
-    var ctx = $('#modal-chart');
+// //function to render the charts in the modal
+// function createChartinModal(title, labels, backgroundColor, chartsData, chartType, displayLegend) {
+//     //if you want to display the charts in modal, make sure you have configured the modal in index.html
+//     //create the context that will draw the charts over the canvas in the "#modal-chart" div of the modal
+//     var ctx = $('#modal-chart');
 
-    // Once you have the element or context, instantiate the chart-type by passing the configuration,
-    //for more info. refer: https://www.chartjs.org/docs/latest/configuration/
-    var data = {
-        labels: labels,
-        datasets: [{
-            label: title,
-            backgroundColor: backgroundColor,
-            data: chartsData,
-            fill: false
-        }]
-    };
-    var options = {
-        title: {
-            display: true,
-            text: title
-        },
-        layout: {
-            padding: {
-                left: 5,
-                right: 0,
-                top: 0,
-                bottom: 0
-            }
-        },
-        legend: {
-            display: displayLegend,
-            position: "right"
-        },
+//     // Once you have the element or context, instantiate the chart-type by passing the configuration,
+//     //for more info. refer: https://www.chartjs.org/docs/latest/configuration/
+//     var data = {
+//         labels: labels,
+//         datasets: [{
+//             label: title,
+//             backgroundColor: backgroundColor,
+//             data: chartsData,
+//             fill: false
+//         }]
+//     };
+//     var options = {
+//         title: {
+//             display: true,
+//             text: title
+//         },
+//         layout: {
+//             padding: {
+//                 left: 5,
+//                 right: 0,
+//                 top: 0,
+//                 bottom: 0
+//             }
+//         },
+//         legend: {
+//             display: displayLegend,
+//             position: "right"
+//         },
 
-    }
+//     }
 
-    modalChart = new Chart(ctx, {
-        type: chartType,
-        data: data,
-        options: options
-    });
+//     modalChart = new Chart(ctx, {
+//         type: chartType,
+//         data: data,
+//         options: options
+//     });
 
-}
+// }

@@ -23,16 +23,17 @@
 </head>
 
 <body>
+
+
+    <div class="feedback" id="feedback" style="overflow:scroll; height: 80%; width:65%; position: fixed; right: 400px; bottom: 50px;">
+        <div id="feedbackButton" class= "btn waves-effect waves-light " style="background-color:#5a17ee; position: fixed; right: 375px; bottom: 5px; width: 10%;">Submit</div>
+    </div>
     
     <div class="container" id="container">
         <!-- Modal for rendering the charts, declare this if you want to render charts, 
          else you remove the modal -->
         <div id="modal1" class="modal">
             <canvas id="modal-chart"></canvas>
-        </div>
-
-        <div class="feedback" id="feedback" style="overflow:scroll; height: 100%;">
-            <div id="feedbackButton" class= "btn waves-effect waves-light " style="width:100%;background-color:#5a17ee; position: fixed; bottom: 5px; width: 10%; ">Submit</div>
         </div>
 
         <!--chatbot widget -->
