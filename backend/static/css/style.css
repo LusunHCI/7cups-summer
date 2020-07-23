@@ -14,9 +14,9 @@ html {
 .widget {
     display: none;
     width: 350px;
-    right: 15px;
+    left: 15px;
     height: 500px;
-    bottom: 5%;
+    bottom: 5px;
     position: fixed;
     background: #f7f7f7;
     border-radius: 10px 10px 10px 10px;
@@ -56,7 +56,9 @@ div.chats::-webkit-scrollbar {
     / optional: just make scrollbar invisible */
 }
 
-
+.material-icons.themeColor { 
+    color: #5a17ee; 
+}
 
 .clearfix {
     margin-top: 2px;
@@ -202,7 +204,7 @@ textarea-webkit-scrollbar {
     padding: 5px;
     width: 10%;
     bottom: 0;
-    right: 0;
+    left: 0;
     cursor: pointer;
 }
 
@@ -691,7 +693,7 @@ div.content_data::-webkit-scrollbar {
 }
 
 .modal {
-    height: 60%;
+    height: 70%;
     border-radius: 10px;
 }
 

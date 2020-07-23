@@ -10,6 +10,9 @@ app = Flask(__name__,static_folder='static',template_folder='static')
 def index():
 	return render_template('login.html')
 
+@app.route('/intents/')
+def intent(userid=None):
+	return render_template('intents.html')
 
 @app.route('/chat/?<string:userid>')
 def chat(userid):

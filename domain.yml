@@ -55,7 +55,7 @@ responses:
       data:
       - description: You really liked this girl and it seemed like she felt the same
           way, but then she started being more and more distant.
-        title: Reflecttion
+        title: Reflection
       - description: You seem very sad and confused by her behavior.
         title: Label emotion
       - description: I'm sorry that she was becoming more and more distant.
@@ -82,7 +82,7 @@ responses:
       data:
       - description: So you got back together, but then she started distancing herself
           like before.
-        title: Reflecttion
+        title: Reflection
       - description: It seems like you are very frustrated by her ghosting you.
         title: Label emotion
       - description: I'm sorry that she kept ghosting you like that.
@@ -98,7 +98,7 @@ responses:
   - custom:
       data:
       - description: So it seems she never felt the same way.
-        title: Reflecttion
+        title: Reflection
       - description: I'm sorry that she strung you along like that.
         title: Condolence
       - description: It's so hard hearing that a person you like doesn't feel the

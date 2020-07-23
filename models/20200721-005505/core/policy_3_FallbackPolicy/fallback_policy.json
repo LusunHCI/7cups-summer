@@ -1,0 +1,7 @@
+{
+  "priority": 4,
+  "nlu_threshold": 0.1,
+  "ambiguity_threshold": 0.1,
+  "core_threshold": 0.1,
+  "fallback_action_name": "action_my_fallback"
+}

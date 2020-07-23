@@ -1,9 +1,11 @@
-//Bot pop-up intro
+
 document.addEventListener('DOMContentLoaded', function() {
-    var elemsTap = document.querySelector('.tap-target');
-    var instancesTap = M.TapTarget.init(elemsTap, {});
-    instancesTap.open();
-    setTimeout(function() { instancesTap.close(); }, 4000);
+    // var elemsTap = document.querySelector('.tap-target');
+    // var instancesTap = M.TapTarget.init(elemsTap, {});
+    // instancesTap.open();
+    // setTimeout(function() { instancesTap.close(); }, 4000);
+    var elems = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elems);
 
 });
 
@@ -12,8 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
 $(document).ready(function() {
 
 
-    //Bot pop-up intro
-    $("div").removeClass("tap-target-origin")
 
     //drop down menu for close, restart conversation & clear the chats.
     $('.dropdown-trigger').dropdown();
@@ -21,7 +21,7 @@ $(document).ready(function() {
     //initiate the modal for displaying the charts, if you dont have charts, then you comment the below line
     // $('.modal').modal();
 
-
+    $('.modal').modal();
 
     //enable this if u have configured the bot to start the conversation. 
     // showBotTyping();
@@ -248,7 +248,7 @@ function setBotResponse(response) {
                     var BotResponse = '<img class="botAvatar" src="../static/img/sara_avatar.png"/><p class="botMsg">' + response[i].text + '</p><div class="clearfix"></div>';
                     $(BotResponse).appendTo(".chats").hide().fadeIn(1000);
                     message_count++;
-                    var FeedbackResponse='<p class="feedbackMsg">' + response[i].text + '</p> <div class="input-field"> <label for="userFeedback">Give feedback on this message</label> <input id="userFeedback ' +message_count.toString()+'class="userFeedback" type="text" name="userFeedback'+message_count.toString()+'""> </div>';
+                    var FeedbackResponse='<p class="feedbackMsg">' + response[i].text + '</p> <div class="input-field"> <label for="userFeedback">Please help us improve this chatbot response</label> <input id="userFeedback ' +message_count.toString()+'class="userFeedback" type="text" name="userFeedback'+message_count.toString()+'""> </div>';
                     $(FeedbackResponse).appendTo(".feedback");
                 }
 
@@ -668,7 +668,7 @@ function createCollapsible(data) {
     var contents = '<ul class="collapsible">' + list + '</uL>';
     $(contents).appendTo(".chats");
     message_count++;
-    var feedbackContents='<ul class="feedbackHint">' + hintList + '</uL> <div class="input-field">  <label for="userFeedback">Give Feedback on this hint</label> <input id="userFeedback' +message_count.toString()+' class="userFeedback" type="text" name="userFeedback'+ message_count.toString()+'"> </div>';
+    var feedbackContents='<ul class="feedbackHint">' + hintList + '</uL> <div class="input-field">  <label for="userFeedback">Please help us imporve this hints</label> <input id="userFeedback' +message_count.toString()+' class="userFeedback" type="text" name="userFeedback'+ message_count.toString()+'"> </div>';
     $(feedbackContents).appendTo(".feedback");
     // initialize the collapsible
     $('.collapsible').collapsible();

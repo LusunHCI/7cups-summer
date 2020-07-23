@@ -24,17 +24,80 @@
 
 <body>
 
-    <form id="feedbackForm">
-        <div class="feedback" id="feedback" style="overflow:scroll; height: 80%; width:65%; position: fixed; right: 400px; bottom: 50px;">
-            <div id="feedbackButton" class= "btn waves-effect waves-light " style="background-color:#5a17ee; position: fixed; right: 375px; bottom: 5px; width: 10%;">Submit</div>
+
+    <nav style="width:1500px; background-color: #5a17ee;">
+        <div class="nav-wrapper">
+            <!--       <a href="#hints" class="brand-logo right"></a> -->
+            <ul id="nav-mobile" class="left hide-on-med-and-down">
+                <li data-target="modal1" class="modal-trigger" ><a href="#">Show Intents</a></li>
+                <li><a href="#">Co-design on Intents</a></li>
+                <li class="active"><a href="#">Co-desion on Hints</a></li>
+            </ul>
         </div>
-    </form>
-    
+    </nav>
+
+    <!--     <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a> -->
+
     <div class="container" id="container">
         <!-- Modal for rendering the charts, declare this if you want to render charts, 
            else you remove the modal -->
-           <div id="modal1" class="modal">
-            <canvas id="modal-chart"></canvas>
+
+
+           <form id="feedbackForm">
+            <div class="feedback" id="feedback" style="overflow:scroll; height: 80%; width:65%; position: fixed; left: 400px; bottom: 50px;">
+                <div id="feedbackButton" class= "btn waves-effect waves-light " style="background-color:#5a17ee; position: fixed; right: 15px; bottom: 5px; width: 10%;">Submit</div>
+            </div>
+        </form>
+
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+                <h4>Dictionary</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th> Intents</th>
+                            <th> Utterance Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>greeting</td>
+                            <td>Good morning! Welcome to 7cups!</td>
+                        </tr>
+                        <tr>
+                            <td>age_inquiry</td>
+                            <td>How old are you?</td>
+                        </tr>
+                        <tr>
+                            <td>stressor_inquiry</td>
+                            <td>Would you like to share your problems?</td>
+                        </tr>
+                        <tr>
+                            <td>stressor_inquiry_time</td>
+                            <td>How long has it been?</td>
+                        </tr>
+                        <tr>
+                            <td>stressor_inquiry_when</td>
+                            <td>When did this happen?</td>
+                        </tr>
+                        <tr>
+                            <td>stressor_inquiry_feelings</td>
+                            <td>How did you feel about that?</td>
+                        </tr>
+                        <tr>
+                            <td>stressor_inquiry_further_details</td>
+                            <td>Can you tell me more about the situation?</td>
+                        </tr>
+                        <tr>
+                            <td>stressor_inquiry_why</td>
+                            <td>Do you know why you might feel this way?</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+            </div>
         </div>
 
         <!--chatbot widget -->
@@ -71,16 +134,17 @@
 
     <!--bot profile-->
     <div class="profile_div" id="profile_div">
-        <img class="imgProfile" src="../static/img/botAvatar.png" />
+        <!-- <img class="imgProfile" src="../static/img/botAvatar.png" /> -->
+        <i class="large material-icons themeColor">android</i>
     </div>
 
     <!-- Bot pop-up intro -->
-    <div class="tap-target" data-target="profile_div">
+<!--     <div class="tap-target" data-target="profile_div">
         <div class="tap-target-content">
             <h5 class="white-text">Hey there 👋</h5>
             <p class="white-text">I am a 7cups user-simulated chatbot. I am going to help you become a better listener</p>
         </div>
-    </div>
+    </div> -->
 
 </div>
 
