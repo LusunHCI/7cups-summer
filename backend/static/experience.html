@@ -1,0 +1,104 @@
+<html>
+
+<head>
+    <title>Chatbot</title>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:500&display=swap" rel="stylesheet">
+
+    <!--Import Font Awesome Icon Font-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+
+    <!--Import materialize.css-->
+    <link rel="stylesheet" type="text/css" href="../static/css/materialize.min.css">
+
+    <!--Main css-->
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<body>
+
+
+<div class="nav-bar" style="width: 1270px;">
+    <nav style="width:100%; background-color: #5a17ee;">
+        <div class="nav-wrapper">
+          <ul id="nav-mobile" class="left hide-on-med-and-down">
+            <li class="active"><a href="#">Experience the Chatbot</a></li>
+            <li><a href="#">Co-design Activities</a></li>
+        </ul>
+        </div>
+    </nav>
+</div>
+
+
+<div class="container" id="container">
+
+    <div class="instruction" id="instruction" style="overflow:scroll; height: 85%; width:65%; position: fixed; left: 400px; bottom: 50px;">
+        <h4>Instructions</h4>
+        <p class="experience_instruction">
+            Please try to communicate with the chatbot on the left. The chatbot will simulate a 7 cups member struggling with their breakup that you, as a listener, can help and further develop your skills as a listener. When you are done interacting with the chatbot, click “End the conversation” to move on to the next section of co-design.
+        </p>
+    </div>
+
+    <!--chatbot widget -->
+    <div class="widget">
+        <div class="chat_header">
+
+            <!--Add the name of the bot here -->
+            <span class="chat_header_title">training bot</span>
+            <span class="dropdown-trigger" href='#' data-target='dropdown1'>
+              <i class="material-icons">
+                  more_vert
+              </i>
+          </span>
+
+          <!-- Dropdown menu-->
+          <ul id='dropdown1' class='dropdown-content'>
+            <li><a href="#" id="clear">Clear</a></li>
+            <li><a href="#" id="restart">Restart</a></li>
+            <li><a href="#" id="close">Close</a></li>
+        </ul>
+    </div>
+
+    <!--Chatbot contents goes here -->
+    <div class="chats" id="chats">
+        <div class="clearfix"></div>
+    </div>
+
+    <!--keypad for user to type the message -->
+    <div class="keypad">
+        <textarea id="userInput" placeholder="Type a message..." class="usrInput"></textarea>
+        <div id="sendButton"><i class="fa fa-paper-plane" aria-hidden="true"></i></div>
+    </div>
+</div>
+<div class="endButton">
+    <div id="endConversation" class= "btn waves-effect waves-light" style="background: #5a17ee; width: 80%; left: 35px; border-radius:30px;">End the Conversation</div>
+</div>
+
+<!--bot profile-->
+<div class="profile_div" id="profile_div">
+    <!-- <img class="imgProfile" src="../static/img/botAvatar.png" /> -->
+    <i class="large material-icons themeColor">android</i>
+</div>
+
+</div>
+
+<!--JavaScript at end of body for optimized loading-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="../static/js/materialize.min.js"></script>
+
+<!--Main Script -->
+<script type="text/javascript" src="../static/js/experience.js"></script>
+
+<!--Chart.js Script -->
+<script type="text/javascript" src="../static/js/chart.min.js"></script>
+
+</body>
+
+</html>

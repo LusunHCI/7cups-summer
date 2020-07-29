@@ -248,8 +248,14 @@ function setBotResponse(response) {
                     var BotResponse = '<img class="botAvatar" src="../static/img/sara_avatar.png"/><p class="botMsg">' + response[i].text + '</p><div class="clearfix"></div>';
                     $(BotResponse).appendTo(".chats").hide().fadeIn(1000);
                     message_count++;
-                    var FeedbackResponse='<p class="feedbackMsg">' + response[i].text + '</p> <div class="input-field"> <label for="userFeedback">Please help us improve this chatbot response</label> <input id="userFeedback ' +message_count.toString()+'class="userFeedback" type="text" name="userFeedback'+message_count.toString()+'""> </div>';
+                    // var FeedbackResponse='<p class="feedbackMsg">' + response[i].text + '</p> <p> Do you think this chatbot response need to be rephrased? </p>';
+                    var FeedbackResponse='<p class="feedbackMsg">' + response[i].text + '</p> <p> Do you think this chatbot response need to be rephrased? </p>';
                     $(FeedbackResponse).appendTo(".feedback");
+                    var choiceButton= '<input type="text" class="hiddenInput" style="width:1px"> <button class="yesedit btn" type="button" id="yesedit" style="background-color:white;border-radius:30px; border: 2px solid #5a17ee; color: #5a17ee"> Yes </button>  <button class="noedit btn" id="noedit"  type="button" style="background-color:white;border-radius:30px; border: 2px solid #5a17ee; color: #5a17ee"> No </button>';
+                    $(choiceButton).appendTo(".feedback");
+                    var editResponse='<div class="input-field"> <label for="userFeedback">Please help us improve this chatbot response</label> <input id="userFeedback ' +message_count.toString()+'class="userFeedback" type="text" name="userFeedback'+message_count.toString()+'""> </div>';
+                    $(editResponse).appendTo(".feedback");
+                    
                 }
 
                 //check if the response contains "images"
@@ -372,7 +378,23 @@ $("#profile_div").click(function() {
     $(".profile_div").toggle();
     $(".widget").toggle();
 });
+//====================================== Yes and No button ==========================================
+$("#yesedit").on("click", function(e) {
+    console.log("yes");
+    yesnohide();
+    var editResponse='<div class="input-field"> <label for="userFeedback">Please help us improve this chatbot response</label> <input id="userFeedback ' +message_count.toString()+'class="userFeedback" type="text" name="userFeedback'+message_count.toString()+'""> </div>';
+    $(editResponse).appendTo(".feedback");
+});
 
+$("#noedit").on("click", function(e) {
+    console.log("yes");
+    yesnohide();
+});
+
+function yesnohide() {
+    $('#yesedit').remove();
+    $('#noedit').remove();
+}
 
 //====================================== Render Pdf attachment =======================================
 function renderPdfAttachment(data) {

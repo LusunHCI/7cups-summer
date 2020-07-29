@@ -40,12 +40,12 @@
   })
   function userLogin(userid) {
     $.ajax({
-      url: "/chat/%3F"+userid,
+      url: "/experience/%3F"+userid,
       type: "GET",
       contentType: "application/x-www-form-urlencoded;",
       data: '',
       success: function() {
-        window.location.href = '/chat/%3F'+userid;
+        window.location.href = '/experience/%3F'+userid;
       }
     });
   }

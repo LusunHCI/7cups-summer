@@ -10,13 +10,17 @@ app = Flask(__name__,static_folder='static',template_folder='static')
 def index():
 	return render_template('login.html')
 
-@app.route('/intents/')
+@app.route('/intents/?<string:userid>')
 def intent(userid=None):
 	return render_template('intents.html')
 
-@app.route('/chat/?<string:userid>')
-def chat(userid):
-    return render_template('chat.html')
+@app.route('/feedback/?<string:userid>')
+def feedback(userid):
+    return render_template('feedback.html')
+
+@app.route('/experience/?<string:userid>')
+def experience(userid):
+    return render_template('experience.html')
 
 @app.route('/userMessage/', methods=['POST','GET'])
 def userMessage():
@@ -43,7 +47,7 @@ def userMessage():
 		mycursor.close()
 		mydb.close()
 		print(sql)
-	return render_template('chat.html')
+	return render_template('feedback.html')
 
 @app.route('/botResponse/', methods=['POST','GET'])
 def botResponse():
@@ -77,4 +81,4 @@ def botResponse():
 		mycursor.close()
 		mydb.close()
 		print(sql)
-	return render_template('chat.html')
+	return render_template('feedback.html')
