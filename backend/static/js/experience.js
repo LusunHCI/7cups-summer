@@ -342,10 +342,15 @@ function setBotResponse(response) {
 
 $("#endConversation").click(function() {
     $('.experience_instruction').remove();
-    var codesign_instruction="<p>instruction for codesign</p>";
+    var codesign_instruction="<p>In this section of the codesign, please interact with the chatbot again, but as you do so, correct the chatbot by answering the corresponding questions regarding Intents, Responses and Feedback.<br/>  <br/> Intents refer to the goal or intention of any message you send to the chatbot. Responses are given by the chatbot based on the intent. Below are examples of corresponding intents and responses with the confidence score indicating the level of correlation between the intent and the response. <br/>  <br/> <table> <tbody> <tr> <td> Listener: “Hi!” </td> <td> Intent: greeting (confidence score = 0.98) </td> </tr> <tr> <td> Chatbot: “Hello”</td> <td>Response: greeting  </td> </tr> </tbody> </table> <br/>  <br/> The chatbot understood the listener’s intent of greeting saying “Hi” and responded with “Hello”. <br/> <br/> <table> <tbody> <tr> <td>Listener: “What happened?” </td> <td>Intent: stressor inquiry (confidence score = 0.88) </td> </tr> <tr> <td> Chatbot: “I just went through a breakup” </td> <td> Response: introduce stressor </td> </tr> </tbody> </table> <br/> <br/> The chatbot understood the listener’s intent of stressor_inquiry saying “What happened?” and responded with “I just went through a breakup” .  <br/>  <br/> As you look over the Intents, Responses, and Feedback please edit or provide feedback regarding the content of the chatbot’s responses to your messages. When you are done, click “End the conversation”.</p>";
     $(codesign_instruction).appendTo(".instruction");
-    var startButton="<div id='startButton' class='btn waves-effect waves-light' style='background-color:#5a17ee; position: fixed; right: 15px; bottom: 5px; width: 10%; border-radius:30px;'>Start</div>";
-    $(startButton).appendTo(".instruction");
+    $(".startButton").toggle();
+});
+
+//====================================== Start co-design activity =========================================
+
+$("#startCodesign").click(function() {
+    window.location.href = '/feedback/%3F'+para;
 });
 
 //====================================== Toggle chatbot =======================================

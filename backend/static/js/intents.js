@@ -228,7 +228,7 @@ function send(message) {
 }
 //===================append Intents and scores to interface ===================================
 function appendIntentsAndScores(intent, message) {
-    var listenerMessage='<p class="listenerMsg">' + message + '</p> <p> The model detected the intention of this message as ' +intent['name']+ ' with the probability ' +intent['confidence']+ '/1.0. </p><p> Is the detected intent correct? Check out the intents dictionary here.</p>';
+    var listenerMessage='<p class="listenerMsg">' + message + '</p> <div class="correctIntents"> <p> The model detected the intention of this message as ' +intent['name']+ ' with the probability ' +intent['confidence']+ '/1.0. </p><p> Is the detected intent correct? Check out the intents dictionary here.</p></div>';
     $(listenerMessage).appendTo(".feedback");
     var choiceButton= '<input type="text" class="hiddenInput" style="width:1px"> <button class="yesedit btn" type="button" id="yesedit" style="background-color:white;border-radius:30px; border: 2px solid #5a17ee; color: #5a17ee"> Yes </button>  <button class="noedit btn" id="noedit"  type="button" style="background-color:white;border-radius:30px; border: 2px solid #5a17ee; color: #5a17ee"> No </button>';
     $(choiceButton).appendTo(".feedback");

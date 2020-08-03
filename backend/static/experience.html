@@ -25,13 +25,13 @@
 <body>
 
 
-<div class="nav-bar" style="width: 1270px;">
-    <nav style="width:100%; background-color: #5a17ee;">
-        <div class="nav-wrapper">
-          <ul id="nav-mobile" class="left hide-on-med-and-down">
-            <li class="active"><a href="#">Experience the Chatbot</a></li>
-            <li><a href="#">Co-design Activities</a></li>
-        </ul>
+    <div class="nav-bar" style="width: 1270px;">
+        <nav style="width:100%; background-color: #5a17ee;">
+            <div class="nav-wrapper">
+              <ul id="nav-mobile" class="left hide-on-med-and-down">
+                <li class="active"><a href="#">Experience the Chatbot</a></li>
+                <li><a href="#">Co-design Activities</a></li>
+            </ul>
         </div>
     </nav>
 </div>
@@ -39,11 +39,13 @@
 
 <div class="container" id="container">
 
-    <div class="instruction" id="instruction" style="overflow:scroll; height: 85%; width:65%; position: fixed; left: 400px; bottom: 50px;">
+    <div class="instruction" id="instruction" style="overflow:scroll; height: 83%; width:65%; position: fixed; left: 400px; bottom: 50px;">
         <h4>Instructions</h4>
         <p class="experience_instruction">
             Please try to communicate with the chatbot on the left. The chatbot will simulate a 7 cups member struggling with their breakup that you, as a listener, can help and further develop your skills as a listener. When you are done interacting with the chatbot, click “End the conversation” to move on to the next section of co-design.
         </p>
+        <div class="startButton">
+            <div id='startCodesign' class='btn waves-effect waves-light' style='background-color:#5a17ee; position: fixed; right: 15px; bottom: 5px; width: 10%; border-radius:30px;'>Start</div>
     </div>
 
     <!--chatbot widget -->
@@ -52,18 +54,18 @@
 
             <!--Add the name of the bot here -->
             <span class="chat_header_title">training bot</span>
-            <span class="dropdown-trigger" href='#' data-target='dropdown1'>
+<!--             <span class="dropdown-trigger1" href='#' data-target='dropdown1'>
               <i class="material-icons">
                   more_vert
               </i>
-          </span>
+          </span> -->
 
           <!-- Dropdown menu-->
-          <ul id='dropdown1' class='dropdown-content'>
+<!--           <ul id='dropdown1' class='dropdown-content1'>
             <li><a href="#" id="clear">Clear</a></li>
             <li><a href="#" id="restart">Restart</a></li>
             <li><a href="#" id="close">Close</a></li>
-        </ul>
+        </ul> -->
     </div>
 
     <!--Chatbot contents goes here -->

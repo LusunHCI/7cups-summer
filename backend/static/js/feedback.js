@@ -4,8 +4,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // var instancesTap = M.TapTarget.init(elemsTap, {});
     // instancesTap.open();
     // setTimeout(function() { instancesTap.close(); }, 4000);
-    var elems = document.querySelectorAll('.modal');
-    var instances = M.Modal.init(elems);
+    var elemsModal = document.querySelectorAll('.modal');
+    var instancesModal = M.Modal.init(elemsModal);
+    var elemSelect = document.querySelectorAll('select');
+    var options = document.querySelectorAll('option');
+    var instanceSelect = M.FormSelect.init(elemSelect,options);
 
 });
 
@@ -16,12 +19,14 @@ $(document).ready(function() {
 
 
     //drop down menu for close, restart conversation & clear the chats.
-    $('.dropdown-trigger').dropdown();
+    // $('.dropdown-trigger').dropdown();
 
     //initiate the modal for displaying the charts, if you dont have charts, then you comment the below line
     // $('.modal').modal();
 
     $('.modal').modal();
+
+    $('select').formSelect();
 
     //enable this if u have configured the bot to start the conversation. 
     // showBotTyping();
@@ -33,6 +38,8 @@ $(document).ready(function() {
     arrUrl = url.split("%3F");
     para = arrUrl[1];
     message_count=0;
+    intentsDict={"age_inquiry":"age_inquiry: the listener is asking for the user’s age. <br/> Ex: How old are you?", "greeting":"greeting: the listener says hi to start the conversation. <br/> Ex: Hi, welcome to 7cups"};
+
 
     //if you want the bot to start the conversation
     // action_trigger();
@@ -212,17 +219,46 @@ function send(message) {
         }
     });
 
+    var intent="";
+    $.ajax({
+        url:"http://localhost:5005/model/parse",
+        type:"POST",
+        contentType: "application/json",
+        data: JSON.stringify({ text: message}),
+        success: function(json) {
+            console.log(json);
+            intent=json['intent'];
+            ranking=json['intent_ranking'];
+            appendIntentsAndScores(intent, message,ranking);
+        }
+    });
+
+}
+//===================append Intents and scores to interface ===================================
+
+function appendIntentsAndScores(intent, message,ranking) {
+    console.log(ranking);
+    var listenerMessage='<div class="lmsg"> <p class="listenerMsg">' + message + '</p> </div> <div class="selectIntents"> <p> The model detected the intention of this message as "' +intent['name']+ '" with the confidence as ' +intent['confidence']+ '/1.0. </p></div>';
+    $(listenerMessage).appendTo(".feedback");
+    var intentCard='<div class="intentCard"><div class="card"><div class="card-content">'+ intentsDict[intent['name']] +'</div> </div> </div>';
+    $(intentCard).appendTo(".feedback");
+    var isCorrect="<div class=isCorrect><p> Did this capture your intention?</p></div>";
+    $(isCorrect).appendTo(".feedback");
+    var choiceButton='<div class="choiceButton"> <input type="text" class="hiddenInput" style="height:1px;display:none;"> <br/> <button class="yesintent btn" id="yesIntent" onclick="yesintent()" type="button" style="background-color:white;border-radius:30px; border: 2px solid #5a17ee; color: #5a17ee"> Yes </button>  <button class="noedit btn" id="noIntent" onclick="nointent()" type="button" style="background-color:white;border-radius:30px; border: 2px solid #5a17ee; color: #5a17ee"> No </button> </div>';
+    $(choiceButton).appendTo(".feedback");
+    var selectDesc="<div class='yesDesc'><p style='float:left; width: 100%;'>If you think this is your intent, press the Next button. </p> </div> <div class='noDesc'> <p style='float:left; width: 100%;'> If not, please select one intent from below that could better capture your intention in the message.</p> </div>";
+    $(selectDesc).appendTo(".feedback");
+    var intentRanking="<div class='intentOption'> <div class='input-field col s12' style='float:left;width:100%;'> <select> <option value=''> "+ intent['name'] +"</option>";
+    for(i=0;i<ranking.length;i++) {
+        intentRanking+="<option value='"+ranking[i]['name']+"'>"+ranking[i]['name']+'  (confindence='+ranking[i]['confidence']+")</option>";
+        console.log(ranking[i]);
+    }
+    intentRanking+="</select> </div> </div>"
+    $(intentRanking).appendTo(".feedback");
 }
 
 //=================== set bot response in the chats ===========================================
 function setBotResponse(response) {
-
-    var url = window.location.href;
-    var arrUrl = url.split("%3F");
-    var para = arrUrl[1];
-    console.log("para=", para);
-
-
     //display bot response after 500 milliseconds
     setTimeout(function() {
         hideBotTyping();
@@ -234,7 +270,7 @@ function setBotResponse(response) {
 
             var BotResponse = '<img class="botAvatar" src="../static/img/sara_avatar.png"/><p class="botMsg">' + fallbackMsg + '</p><div class="clearfix"></div>';
 
-            $(BotResponse).appendTo(".chats").hide().fadeIn(1000);
+            $(BotResponse).appendTo(".chats").hide().fadeIn(500);
             scrollToBottomOfResults();
         } else {
 
@@ -246,101 +282,17 @@ function setBotResponse(response) {
                 //check if the response contains "text"
                 if (response[i].hasOwnProperty("text")) {
                     var BotResponse = '<img class="botAvatar" src="../static/img/sara_avatar.png"/><p class="botMsg">' + response[i].text + '</p><div class="clearfix"></div>';
-                    $(BotResponse).appendTo(".chats").hide().fadeIn(1000);
+                    $(BotResponse).appendTo(".chats").hide().fadeIn(500);
                     message_count++;
-                    // var FeedbackResponse='<p class="feedbackMsg">' + response[i].text + '</p> <p> Do you think this chatbot response need to be rephrased? </p>';
-                    var FeedbackResponse='<p class="feedbackMsg">' + response[i].text + '</p> <p> Do you think this chatbot response need to be rephrased? </p>';
-                    $(FeedbackResponse).appendTo(".feedback");
-                    var choiceButton= '<input type="text" class="hiddenInput" style="width:1px"> <button class="yesedit btn" type="button" id="yesedit" style="background-color:white;border-radius:30px; border: 2px solid #5a17ee; color: #5a17ee"> Yes </button>  <button class="noedit btn" id="noedit"  type="button" style="background-color:white;border-radius:30px; border: 2px solid #5a17ee; color: #5a17ee"> No </button>';
-                    $(choiceButton).appendTo(".feedback");
-                    var editResponse='<div class="input-field"> <label for="userFeedback">Please help us improve this chatbot response</label> <input id="userFeedback ' +message_count.toString()+'class="userFeedback" type="text" name="userFeedback'+message_count.toString()+'""> </div>';
-                    $(editResponse).appendTo(".feedback");
-                    
                 }
-
-                //check if the response contains "images"
-                if (response[i].hasOwnProperty("image")) {
-                    var BotResponse = '<div class="singleCard">' + '<img class="imgcard" src="' + response[i].image + '">' + '</div><div class="clearfix">';
-                    $(BotResponse).appendTo(".chats").hide().fadeIn(1000);
-                }
-
 
                 //check if the response contains "buttons" 
                 if (response[i].hasOwnProperty("buttons")) {
                     addSuggestion(response[i].buttons);
                 }
 
-                //check if the response contains "attachment" 
-                if (response[i].hasOwnProperty("attachment")) {
-
-                    //check if the attachment type is "video"
-                    if (response[i].attachment.type == "video") {
-                        video_url = response[i].attachment.payload.src;
-
-                        var BotResponse = '<div class="video-container"> <iframe src="' + video_url + '" frameborder="0" allowfullscreen></iframe> </div>'
-                        $(BotResponse).appendTo(".chats").hide().fadeIn(1000);
-                    }
-
-                }
                 //check if the response contains "custom" message  
                 if (response[i].hasOwnProperty("custom")) {
-
-                    //check if the custom payload type is "quickReplies"
-                    if (response[i].custom.payload == "quickReplies") {
-                        quickRepliesData = response[i].custom.data;
-                        showQuickReplies(quickRepliesData);
-                        return;
-                    }
-
-                    //check if the custom payload type is "pdf_attachment"
-                    if (response[i].custom.payload == "pdf_attachment") {
-
-                        renderPdfAttachment(response[i]);
-                        return;
-                    }
-
-                    //check if the custom payload type is "dropDown"
-                    if (response[i].custom.payload == "dropDown") {
-                        dropDownData = response[i].custom.data;
-                        renderDropDwon(dropDownData);
-                        return;
-                    }
-
-                    //check if the custom payload type is "location"
-                    if (response[i].custom.payload == "location") {
-                        $("#userInput").prop('disabled', true);
-                        getLocation();
-                        scrollToBottomOfResults();
-                        return;
-                    }
-
-                    //check if the custom payload type is "cardsCarousel"
-                    if (response[i].custom.payload == "cardsCarousel") {
-                        restaurantsData = (response[i].custom.data)
-                        showCardsCarousel(restaurantsData);
-                        return;
-                    }
-
-                    // //check if the custom payload type is "chart"
-                    // if (response[i].custom.payload == "chart") {
-
-                    //     // sample format of the charts data:
-                    //     // var chartData = { "title": "Leaves", "labels": ["Sick Leave", "Casual Leave", "Earned Leave", "Flexi Leave"], "backgroundColor": ["#36a2eb", "#ffcd56", "#ff6384", "#009688", "#c45850"], "chartsData": [5, 10, 22, 3], "chartType": "pie", "displayLegend": "true" }
-
-                    //     //store the below parameters as global variable, 
-                    //     // so that it can be used while displaying the charts in modal.
-                    //     chartData = (response[i].custom.data)
-                    //     title = chartData.title;
-                    //     labels = chartData.labels;
-                    //     backgroundColor = chartData.backgroundColor;
-                    //     chartsData = chartData.chartsData;
-                    //     chartType = chartData.chartType;
-                    //     displayLegend = chartData.displayLegend;
-
-                    //     // pass the above variable to createChart function
-                    //     createChart(title, labels, backgroundColor, chartsData, chartType, displayLegend)
-                    //     return;
-                    // }
 
                     //check of the custom payload type is "collapsible"
                     if (response[i].custom.payload == "collapsible") {
@@ -351,6 +303,7 @@ function setBotResponse(response) {
                         botmessage=data;
                     }
                 }
+
                 var message_id=para+message_count.toString();
                 $.ajax({
                     url: "/botResponse",
@@ -379,21 +332,21 @@ $("#profile_div").click(function() {
     $(".widget").toggle();
 });
 //====================================== Yes and No button ==========================================
-$("#yesedit").on("click", function(e) {
-    console.log("yes");
-    yesnohide();
-    var editResponse='<div class="input-field"> <label for="userFeedback">Please help us improve this chatbot response</label> <input id="userFeedback ' +message_count.toString()+'class="userFeedback" type="text" name="userFeedback'+message_count.toString()+'""> </div>';
-    $(editResponse).appendTo(".feedback");
-});
-
-$("#noedit").on("click", function(e) {
-    console.log("yes");
-    yesnohide();
-});
-
-function yesnohide() {
-    $('#yesedit').remove();
-    $('#noedit').remove();
+function nointent() {
+    var no=document.getElementById("noIntent");
+    no.style="background-color:#5a17ee; color: white; border-radius:30px";
+    var yes=document.getElementById("yesIntent");
+    yes.style="background-color:white; border-radius:30px; border: 2px solid #5a17ee; color: #5a17ee";
+    $(".noDesc").toggle();
+    $(".intentOption").toggle();
+    $('select').formSelect();
+}
+function yesintent() {
+    var yes=document.getElementById("yesIntent");
+    yes.style="background-color:#5a17ee; color:white; border-radius:30px";
+    var no=document.getElementById("noIntent");
+    no.style="background-color:white; border-radius:30px; border: 2px solid #5a17ee; color: #5a17ee";
+    $(".yesDesc").toggle();
 }
 
 //====================================== Render Pdf attachment =======================================
@@ -448,13 +401,13 @@ function addSuggestion(textToAdd) {
     setTimeout(function() {
         var suggestions = textToAdd;
         var suggLength = textToAdd.length;
-        $(' <div class="singleCard"> <div class="suggestions"><div class="menu"></div></div></diV>').appendTo(".chats").hide().fadeIn(1000);
+        $(' <div class="singleCard"> <div class="suggestions"><div class="menu"></div></div></diV>').appendTo(".chats").hide().fadeIn(500);
         // Loop through suggestions
         for (i = 0; i < suggLength; i++) {
             $('<div class="menuChips" data-payload=\'' + (suggestions[i].payload) + '\'>' + suggestions[i].title + "</div>").appendTo(".menu");
         }
         scrollToBottomOfResults();
-    }, 1000);
+    }, 500);
 }
 
 // on click of suggestions, get the value and send to rasa
@@ -470,27 +423,6 @@ $(document).on("click", ".menu .menuChips", function() {
 
 });
 
-//====================================== functions for drop-down menu of the bot  =========================================
-
-//restart function to restart the conversation.
-$("#restart").click(function() {
-    restartConversation()
-});
-
-//clear function to clear the chat contents of the widget.
-$("#clear").click(function() {
-    $(".chats").fadeOut("normal", function() {
-        $(".chats").html("");
-        $(".chats").fadeIn();
-    });
-});
-
-//close function to close the widget.
-$("#close").click(function() {
-    $(".profile_div").toggle();
-    $(".widget").toggle();
-    scrollToBottomOfResults();
-});
 
 //====================================== Cards Carousel =========================================
 
@@ -561,7 +493,7 @@ function showQuickReplies(quickRepliesData) {
     }
 
     var quickReplies = '<div class="quickReplies">' + chips + '</div><div class="clearfix"></div>'
-    $(quickReplies).appendTo(".chats").fadeIn(1000);
+    $(quickReplies).appendTo(".chats").fadeIn(500);
     scrollToBottomOfResults();
     const slider = document.querySelector('.quickReplies');
     let isDown = false;
@@ -697,112 +629,3 @@ function createCollapsible(data) {
     scrollToBottomOfResults();
 }
 
-
-//====================================== creating Charts ======================================
-
-//function to create the charts & render it to the canvas
-// function createChart(title, labels, backgroundColor, chartsData, chartType, displayLegend) {
-
-//     //create the ".chart-container" div that will render the charts in canvas as required by charts.js,
-//     // for more info. refer: https://www.chartjs.org/docs/latest/getting-started/usage.html
-//     var html = '<div class="chart-container"> <span class="modal-trigger" id="expand" title="expand" href="#modal1"><i class="fa fa-external-link" aria-hidden="true"></i></span> <canvas id="chat-chart" ></canvas> </div> <div class="clearfix"></div>'
-//     $(html).appendTo('.chats');
-
-//     //create the context that will draw the charts over the canvas in the ".chart-container" div
-//     var ctx = $('#chat-chart');
-
-//     // Once you have the element or context, instantiate the chart-type by passing the configuration,
-//     //for more info. refer: https://www.chartjs.org/docs/latest/configuration/
-//     var data = {
-//         labels: labels,
-//         datasets: [{
-//             label: title,
-//             backgroundColor: backgroundColor,
-//             data: chartsData,
-//             fill: false
-//         }]
-//     };
-//     var options = {
-//         title: {
-//             display: true,
-//             text: title
-//         },
-//         layout: {
-//             padding: {
-//                 left: 5,
-//                 right: 0,
-//                 top: 0,
-//                 bottom: 0
-//             }
-//         },
-//         legend: {
-//             display: displayLegend,
-//             position: "right",
-//             labels: {
-//                 boxWidth: 5,
-//                 fontSize: 10
-//             }
-//         }
-//     }
-
-//     //draw the chart by passing the configuration
-//     chatChart = new Chart(ctx, {
-//         type: chartType,
-//         data: data,
-//         options: options
-//     });
-
-//     scrollToBottomOfResults();
-// }
-
-// // on click of expand button, get the chart data from gloabl variable & render it to modal
-// $(document).on("click", "#expand", function() {
-
-//     //the parameters are declared gloabally while we get the charts data from rasa.
-//     createChartinModal(title, labels, backgroundColor, chartsData, chartType, displayLegend)
-// });
-
-// //function to render the charts in the modal
-// function createChartinModal(title, labels, backgroundColor, chartsData, chartType, displayLegend) {
-//     //if you want to display the charts in modal, make sure you have configured the modal in index.html
-//     //create the context that will draw the charts over the canvas in the "#modal-chart" div of the modal
-//     var ctx = $('#modal-chart');
-
-//     // Once you have the element or context, instantiate the chart-type by passing the configuration,
-//     //for more info. refer: https://www.chartjs.org/docs/latest/configuration/
-//     var data = {
-//         labels: labels,
-//         datasets: [{
-//             label: title,
-//             backgroundColor: backgroundColor,
-//             data: chartsData,
-//             fill: false
-//         }]
-//     };
-//     var options = {
-//         title: {
-//             display: true,
-//             text: title
-//         },
-//         layout: {
-//             padding: {
-//                 left: 5,
-//                 right: 0,
-//                 top: 0,
-//                 bottom: 0
-//             }
-//         },
-//         legend: {
-//             display: displayLegend,
-//             position: "right"
-//         },
-
-//     }
-
-//     modalChart = new Chart(ctx, {
-//         type: chartType,
-//         data: data,
-//         options: options
-//     });
-
-// }
