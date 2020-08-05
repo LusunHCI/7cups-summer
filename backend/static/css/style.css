@@ -108,20 +108,6 @@ div.chats::-webkit-scrollbar {
     border-radius: 0 20px 20px 20px;
 }
 
-.feedbackMsg {
-    margin-top: 5px;
-    background: white;
-    color: black;
-    box-shadow: 2px 3px 9px 0px #9a82842e;
-    padding: 10px;
-    border-radius: 1.5em;
-    max-width: 60%;
-    min-width: 1%;
-    font-size: 15px;
-    word-wrap: break-word;
-    border-radius: 0 20px 20px 20px;
-}
-
 
 .listenerMsg {
     float: left;
@@ -143,7 +129,32 @@ div.chats::-webkit-scrollbar {
     width:40%;
 }
 
+.bmsg {
+    float: left;
+    width:40%;
+}
+
+.chatbotResponse {
+    float: left;
+    margin-top: 5px;
+    word-wrap: break-word;
+    padding: 10px;
+    border-radius: 1.5em;
+    background: white;
+    color: black;
+    font-size: 15px;
+    max-width: 80%;
+    min-width: 20%;
+    box-shadow: 0px 2px 5px 0px #9a828454;
+    border-radius: 0 20px 20px 20px;
+}
+
 .selectIntents {
+    float: right;
+    width:60%;
+}
+
+.selectResponse {
     float: right;
     width:60%;
 }
@@ -154,6 +165,12 @@ div.chats::-webkit-scrollbar {
 }
 
 .isCorrect{
+    float: right;
+    width:60%;
+}
+
+.otherResponse {
+    display: none;
     float: right;
     width:60%;
 }
@@ -175,6 +192,18 @@ div.chats::-webkit-scrollbar {
 .intentOption {
     display: none;
     float: right;
+    width: 60%;
+}
+
+.actionOption {
+    display: none;
+    float: right;
+    width: 60%;
+}
+
+.yesGuide {
+    display: none;
+    float:right;
     width: 60%;
 }
 

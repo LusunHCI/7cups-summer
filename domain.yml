@@ -3,202 +3,40 @@ session_config:
   carry_over_slots_to_new_session: true
 intents:
 - greeting
-- age_inquiry
-- stressor_inquiry
-- label_emotion_stressor_introduction
-- reflection_stressor_introduction
-- condolence_stressor_introduction
-- empathy_stressor_introduction
-- no_advice
-- stressor_inquiry_feelings
-- stressor_inquiry_when
-- stressor_inquiry_further_details
-- label_emotion_detail
-- reflection_reunion_detail
-- condolence_reunion_detail
-- empathy_reunion_detail
-- further_contact_inquiry
-- reflection_further_contact
-- condolence_further_contact
-- empathy_further_contact
-- label_emotion_conflicting
-- commitment_inquiry
-- support_user_side
-- empathy_longing
-- empathy_jealousy
-- label_emotion_jealous
-- encourage_self
-- condolence_lack_of_closure
-- encourage_healing_and_overcoming
-- encourage_learning_from_this_experience
-- reject_personal_info
-- end_conversation
-- accompany
-- default_fallback
-- general_condolence
-- general_demonstrate_understanding
-- stressor_inquiry_why
-- general_agreement
-- general_empathy
-- stressor_inquiry_time
-- stressor_inqury_time
+- conventional_opening
+- background_question:
+    triggers: respond_background_question
+- nudging
+- question:
+    triggers: respond_question
+- support:
+    triggers: respond_support
+- reflection
+- agreement
+- condolence
+- clarification
+- no-advice
+- empathy
+- closing
 responses:
   utter_greeting:
-  - text: Hey, I'm seeking support with a breakup.
-  utter_age:
-  - text: I am 22 years old and my girlfriend is 20.
-  utter_stressor1:
-  - text: So I've been with this girl for 6 months. At first it seemed like she was
-      very into me and affectionate, so things were going really well.
-  utter_stressor2:
-  - custom:
-      data:
-      - description: You really liked this girl and it seemed like she felt the same
-          way, but then she started being more and more distant.
-        title: Reflection
-      - description: You seem very sad and confused by her behavior.
-        title: Label emotion
-      - description: I'm sorry that she was becoming more and more distant.
-        title: Condolence
-      - description: I've been in similar situations with my relationships. It can
-          be hard to deal with emotional distance like that.
-        title: Empathy
-      payload: collapsible
-    text: But as time passed, she started to tighten up and I thought it was me but
-      she kept reassuring me that it was just her cultural differences. But then she
-      slowly started to distance herself a way with coursework, which scared me again.
-  utter_advice_inquiry:
-  - text: Oh you have? Do you have any advice for me?
-  utter_feelings:
-  - text: Yeah, so I started to panic that she was losing interest. So I tried to
-      talk to her about it once again, but she just ensured me that her feelings were
-      the same and that she was just stressed with work. But then when we met again,
-      she said that she didn't feel the same way about me anymore and broke up with
-      me.
-  utter_breakup_when:
-  - text: This was February
-  utter_further_details:
-  - custom:
-      data:
-      - description: So you got back together, but then she started distancing herself
-          like before.
-        title: Reflection
-      - description: It seems like you are very frustrated by her ghosting you.
-        title: Label emotion
-      - description: I'm sorry that she kept ghosting you like that.
-        title: Condolence
-      - description: I know how it feels to be ghosted. It sucks, especially when
-          things are going really well.
-        title: Empathy
-      payload: collapsible
-    text: About a week later I saw her in a cafe all alone, so I went over and poured
-      my heart to her. She took me back after that and things were great again for
-      a while, but then she totally ghosted me again!
-  utter_further_contact:
-  - custom:
-      data:
-      - description: So it seems she never felt the same way.
-        title: Reflection
-      - description: I'm sorry that she strung you along like that.
-        title: Condolence
-      - description: It's so hard hearing that a person you like doesn't feel the
-          same way.
-        title: Empathy
-      payload: collapsible
-    text: Eventually I got into contact with her and she revealed that she never really
-      developed feelings for me and that I had apparently forced her to stay. She
-      was saying that she can’t see a future with us.
-  utter_feelings_further_pushy_flirty:
-  - text: But honestly it’s so conflicting because SHE was the pushy, flirty one saying
-      I love you and then all of a sudden she told me that it was my fault and that
-      she never really liked me let alone loved me.
-  utter_feelings_further_living_lie:
-  - custom:
-      data:
-      - description: You're right, that's so conflicting! Seems you feel very confused.
-        title: Label emotion
-      payload: collapsible
-    text: So now I’m heartbroken, confused and I feel like I was living a lie.
-  utter_commitment:
-  - text: Well if she genuinely had no feelings for me or was afraid of commitment,
-      I don’t understand why she led me on so long just to find out how she would
-      feel. It's especially selfish and cruel to me because she was the one to say
-      I adore you first and everything!
-  utter_longing:
-  - custom:
-      data:
-      - description: I totally get that.
-        title: Empathy
-      payload: collapsible
-    text: It’s just hard because I still like her a lot and miss the good parts of
-      our relationship. It hurts to think that she's totally moved on or never really
-      felt anything strong enough to have to move on like I do.
-  utter_jealousy:
-  - custom:
-      data:
-      - description: You’re left feeling heartbroken, wondering if she’ll regret her
-          decision, hoping she’ll realise she made a mistake.
-        title: Label emotion
-      - description: All these thoughts take up a lot of mental space. They make it
-          hard to be in the moment, and think about yourself.
-        title: Encourage
-      - description: Maybe she wanted you to think that she was already over it. People
-          often do that to hurt the other person more.
-        title: Empathy
-      payload: collapsible
-    text: And it doesn’t help that she randomly started posting a lot of videos of
-      her and other guys on her stories all of a sudden. Like why would she suddenly
-      do that a day after a break up. Is she trying to hurt me?
-  utter_blame_on_ex:
-  - text: I just don’t get it. I can honestly say I have done nothing wrong in this
-      relationship. She pushed me away and I kept coming back and compromising for
-      her. Like if I was horrible, or we didn’t laugh and click, or get intimate I
-      could understand, but obviously that wasn't the case.
-  utter_shut_out:
-  - custom:
-      data:
-      - description: You need to stop thinking about the possibilities and reasons
-          and you need to allow yourself to heal from this.
-        title: Encourage
-      payload: collapsible
-    text: It’s scary how she can shut me out of her life so quickly. I keep wondering
-      why she treated me like that.
-  utter_hope_to_move_on:
-  - custom:
-      data:
-      - description: Let this experience be an example for you. Learn from it. Don’t
-          ever let yourself get hurt like that again and always remember that you
-          deserve better than to be led on and ghosted.
-        title: Encourage
-      payload: collapsible
-    text: You're right. I need to stop thinking about her and move on.
-  utter_personal_info_inquiry:
-  - text: Thank you so much for your help! Before you go, do you think you could give
-      me your name and number so I can contact you outside of 7cups?
-  utter_gratitude:
-  - text: I understand. Thank you so much for your help. I needed to get that off
-      my plate.
-  utter_end_conversation:
-  - text: See you
+  - text: Hey, I'm here because of a breakup
+  utter_stressor:
+  - text: My ex kept changing her mind about me, first telling me that she was interested
+      and then ghosting me and then coming back to me before dumping me finally.
+  utter_nudging_response:
+  - text: So at first it seemed like she was very into me and affectionate, so things
+      were going really well. But as time passed, she started to tighten up and I
+      thought it was me but she kept reassuring me that she was still interested.
+      But then she slowly started to distance herself which scared me again.
+  utter_closing:
+  - text: Bye
 actions:
 - utter_greeting
-- utter_age
-- utter_stressor1
-- utter_stressor2
-- utter_advice_inquiry
-- utter_feelings
-- utter_breakup_when
-- utter_further_details
-- utter_further_contact
-- utter_feelings_further_pushy_flirty
-- utter_feelings_further_living_lie
-- utter_commitment
-- utter_longing
-- utter_jealousy
-- utter_blame_on_ex
-- utter_shut_out
-- utter_hope_to_move_on
-- utter_personal_info_inquiry
-- utter_gratitude
-- utter_end_conversation
+- utter_stressor
+- respond_background_question
+- utter_nudging_response
+- respond_question
+- respond_support
+- utter_closing
 - action_my_fallback

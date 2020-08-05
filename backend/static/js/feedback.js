@@ -28,6 +28,8 @@ $(document).ready(function() {
 
     $('select').formSelect();
 
+    $('#previousButton').hide();
+
     //enable this if u have configured the bot to start the conversation. 
     // showBotTyping();
     // $("#userInput").prop('disabled', true);
@@ -39,7 +41,7 @@ $(document).ready(function() {
     para = arrUrl[1];
     message_count=0;
     intentsDict={"age_inquiry":"age_inquiry: the listener is asking for the user’s age. <br/> Ex: How old are you?", "greeting":"greeting: the listener says hi to start the conversation. <br/> Ex: Hi, welcome to 7cups"};
-
+    currentShow=1;
 
     //if you want the bot to start the conversation
     // action_trigger();
@@ -126,11 +128,6 @@ $("#sendButton").on("click", function(e) {
         e.preventDefault();
         return false;
     } else {
-        // destroy the existing chart
-
-        // chatChart.destroy();
-        // $(".chart-container").remove();
-        // if (typeof modalChart !== 'undefined') { modalChart.destroy(); }
 
         $(".suggestions").remove();
         $("#paginated_cards").remove();
@@ -229,33 +226,69 @@ function send(message) {
             console.log(json);
             intent=json['intent'];
             ranking=json['intent_ranking'];
-            appendIntentsAndScores(intent, message,ranking);
+            appendIntents(intent, message,ranking);
         }
     });
 
 }
 //===================append Intents and scores to interface ===================================
 
-function appendIntentsAndScores(intent, message,ranking) {
-    console.log(ranking);
-    var listenerMessage='<div class="lmsg"> <p class="listenerMsg">' + message + '</p> </div> <div class="selectIntents"> <p> The model detected the intention of this message as "' +intent['name']+ '" with the confidence as ' +intent['confidence']+ '/1.0. </p></div>';
-    $(listenerMessage).appendTo(".feedback");
+function appendIntents(intent, message,ranking) {
+    var divid='msg'+message_count.toString();
+    var tempdiv="<div class='codesign' id='"+divid+"'> </div>";
+    $(tempdiv).appendTo(".feedback");
+    divid='#'+divid;
+    if(currentShow==1) {
+        $(divid).show();
+    } else {
+        $(divid).hide();
+    }
+    var listenerMessage='<h6>Your message</h6> <div class="lmsg"> <p class="listenerMsg">' + message + '</p> </div> <div class="selectIntents"> <p> The model detected the intention of this message as "' +intent['name']+ '" with the confidence as ' +intent['confidence']+ '/1.0. </p></div>';
+    $(listenerMessage).appendTo(divid);
     var intentCard='<div class="intentCard"><div class="card"><div class="card-content">'+ intentsDict[intent['name']] +'</div> </div> </div>';
-    $(intentCard).appendTo(".feedback");
+    $(intentCard).appendTo(divid);
     var isCorrect="<div class=isCorrect><p> Did this capture your intention?</p></div>";
-    $(isCorrect).appendTo(".feedback");
+    $(isCorrect).appendTo(divid);
     var choiceButton='<div class="choiceButton"> <input type="text" class="hiddenInput" style="height:1px;display:none;"> <br/> <button class="yesintent btn" id="yesIntent" onclick="yesintent()" type="button" style="background-color:white;border-radius:30px; border: 2px solid #5a17ee; color: #5a17ee"> Yes </button>  <button class="noedit btn" id="noIntent" onclick="nointent()" type="button" style="background-color:white;border-radius:30px; border: 2px solid #5a17ee; color: #5a17ee"> No </button> </div>';
-    $(choiceButton).appendTo(".feedback");
+    $(choiceButton).appendTo(divid);
     var selectDesc="<div class='yesDesc'><p style='float:left; width: 100%;'>If you think this is your intent, press the Next button. </p> </div> <div class='noDesc'> <p style='float:left; width: 100%;'> If not, please select one intent from below that could better capture your intention in the message.</p> </div>";
-    $(selectDesc).appendTo(".feedback");
+    $(selectDesc).appendTo(divid);
     var intentRanking="<div class='intentOption'> <div class='input-field col s12' style='float:left;width:100%;'> <select> <option value=''> "+ intent['name'] +"</option>";
     for(i=0;i<ranking.length;i++) {
         intentRanking+="<option value='"+ranking[i]['name']+"'>"+ranking[i]['name']+'  (confindence='+ranking[i]['confidence']+")</option>";
         console.log(ranking[i]);
     }
     intentRanking+="</select> </div> </div>"
-    $(intentRanking).appendTo(".feedback");
+    $(intentRanking).appendTo(divid);
 }
+//=================== next and previous button ==================================================
+$("#nextButton").on("click", function(e) {
+    var currentDiv='#msg'+currentShow.toString();
+    currentShow++;
+    if(currentShow>1) {
+        $('#previousButton').show();
+    }
+    else {
+        $('#previousButton').toggle();        
+    }
+    $(currentDiv).hide();
+    var nextDiv='#msg'+currentShow.toString();
+    $(nextDiv).toggle();
+})
+
+$("#previousButton").on("click", function(e) {
+    var currentDiv='#msg'+currentShow.toString();
+    currentShow--;
+    if(currentShow>1) {
+        $('#previousButton').show();
+    }
+    else {
+        $('#previousButton').toggle();        
+    }
+    $(currentDiv).hide();
+    var previousDiv='#msg'+currentShow.toString();
+    $(previousDiv).toggle();
+})
 
 //=================== set bot response in the chats ===========================================
 function setBotResponse(response) {
@@ -312,6 +345,8 @@ function setBotResponse(response) {
                     data: JSON.stringify({ 'message_id': message_id, 'message': botmessage, 'chatroom_id': para, 'message_type': msg_type, 'feedback': '', 'sender_id': 0}),
                     success: function() {
                         console.log("message=",botmessage);
+                        appendActions(botmessage['text']);
+
                     }
                 });
             }
@@ -321,6 +356,26 @@ function setBotResponse(response) {
 
 
 }
+//====================================== append Actions to the interface ===========================
+function appendActions(botmessage) {
+    var divid='msg'+message_count.toString();
+    var tempdiv="<div class='codesign' id='"+divid+"'> </div>";
+    $(tempdiv).appendTo(".feedback");
+    divid='#'+divid;
+    $(divid).hide();
+    var botMessage='<h6>Chatbot response</h6> <div class="bmsg"> <p class="chatbotResponse">' + botmessage + '</p> </div> <div class="selectResponse"> <p> Does the chatbot response seem reasonable? If not, please select no to improve the resonse. </p></div>';
+    $(botMessage).appendTo(divid);
+    var isResonable='<div class="choiceButton"> <input type="text" class="hiddenInput" style="height:1px;display:none;"> <br/> <button class="yesintent btn" id="yesIntent" onclick="yesintent()" type="button" style="background-color:white;border-radius:30px; border: 2px solid #5a17ee; color: #5a17ee"> Yes </button>  <button class="noedit btn" id="noIntent" onclick="nointent()" type="button" style="background-color:white;border-radius:30px; border: 2px solid #5a17ee; color: #5a17ee"> No </button> </div>';
+    $(isResonable).appendTo(divid);
+    var actionRanking="<div class='actionOption'> <div class='input-field col s12' style='float:left;width:100%;'> <select> <option value=''> "+ botmessage +"</option>";
+    actionRanking+="</select> </div> </div>";
+    $(actionRanking).appendTo(divid);
+    $('select').formSelect();
+    var otherResponse="<div class='otherResponse'><p>What other ways could the chatbot respond with this type of “introduce stressor” action?</p> <textarea class='materialize-textarea' style='float:left;width:100%;'></textarea>  </div>";
+    $(otherResponse).appendTo(divid);
+
+}
+
 //====================================== Submit Feedback ======================================
 $("#feedbackButton").on("click", function(e) {
     var form_data = $("#feedbackForm").serialize();
@@ -337,8 +392,9 @@ function nointent() {
     no.style="background-color:#5a17ee; color: white; border-radius:30px";
     var yes=document.getElementById("yesIntent");
     yes.style="background-color:white; border-radius:30px; border: 2px solid #5a17ee; color: #5a17ee";
-    $(".noDesc").toggle();
-    $(".intentOption").toggle();
+    $(".noDesc").show();
+    $(".intentOption").show();
+    $(".yesDesc").hide();
     $('select').formSelect();
 }
 function yesintent() {
@@ -346,7 +402,9 @@ function yesintent() {
     yes.style="background-color:#5a17ee; color:white; border-radius:30px";
     var no=document.getElementById("noIntent");
     no.style="background-color:white; border-radius:30px; border: 2px solid #5a17ee; color: #5a17ee";
-    $(".yesDesc").toggle();
+    $(".yesDesc").show();
+    $(".noDesc").hide();
+    $(".intentOption").hide();
 }
 
 //====================================== Render Pdf attachment =======================================
