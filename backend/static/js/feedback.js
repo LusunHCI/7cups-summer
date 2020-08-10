@@ -680,7 +680,7 @@ function createCollapsible(data) {
     var contents = '<ul class="collapsible">' + list + '</uL>';
     $(contents).appendTo(".chats");
     message_count++;
-    var feedbackContents='<ul class="feedbackHint">' + hintList + '</uL> <div class="input-field">  <label for="userFeedback">Please help us imporve this hints</label> <input id="userFeedback' +message_count.toString()+' class="userFeedback" type="text" name="userFeedback'+ message_count.toString()+'"> </div>';
+    var feedbackContents='<ul class="feedbackHint">' + hintList + '</uL>';
     $(feedbackContents).appendTo(".feedback");
     // initialize the collapsible
     $('.collapsible').collapsible();

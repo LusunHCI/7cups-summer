@@ -2,16 +2,42 @@
 * greeting
   - utter_greeting
 * conventional_opening
-  - utter_stressor
-* greeting
-  - utter_greeting
-* background_question
-  - respond_background_question
-* nudging
-  - utter_nudging_response
-* question
-  - respond_question
+  - utter_conventional_opening
+* open_question
+  - respond_open_question
+* facilitate
+  - utter_facilitate
+* reflect
+  - respond_reflect
+* empathy
+  - action_ask_for_advice
+* warning
+  - utter_warning
 * support
   - respond_support
+* affirm 
+  - respond_affirm
 * closing
-  - utter_closing
+  - action_ask_personal_info
+
+## advice suicide path
+* greeting
+  - utter_greeting
+* conventional_opening
+  - utter_conventional_opening
+* open_question
+  - respond_open_question
+* facilitate
+  - utter_facilitate
+* reflect
+  - respond_reflect
+* empathy
+  - action_ask_for_advice
+* give_advice
+  - action_suicide
+* support
+  - respond_support
+* affirm 
+  - respond_affirm
+* closing
+  - action_ask_personal_info

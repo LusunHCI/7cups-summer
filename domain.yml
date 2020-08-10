@@ -4,39 +4,47 @@ session_config:
 intents:
 - greeting
 - conventional_opening
-- background_question:
-    triggers: respond_background_question
-- nudging
-- question:
-    triggers: respond_question
+- open_question:
+    triggers: respond_open_question
+- facilitate
+- reflect:
+    triggers: respond_reflect
+- empathy
 - support:
     triggers: respond_support
-- reflection
-- agreement
-- condolence
+- affirm:
+    triggers: respond_affirm
+- giving_information
 - clarification
-- no-advice
-- empathy
+- warning
+- confront
+- inappropriate
 - closing
+- give_advice
 responses:
   utter_greeting:
   - text: Hey, I'm here because of a breakup
-  utter_stressor:
-  - text: My ex kept changing her mind about me, first telling me that she was interested
-      and then ghosting me and then coming back to me before dumping me finally.
-  utter_nudging_response:
-  - text: So at first it seemed like she was very into me and affectionate, so things
-      were going really well. But as time passed, she started to tighten up and I
-      thought it was me but she kept reassuring me that she was still interested.
-      But then she slowly started to distance herself which scared me again.
+  utter_conventional_opening:
+  - text: I'm not great. My ex recently broke up with me.
+  utter_facilitate:
+  - text: We started dating and at first it seemed like she was really interested
+      in me, but then she started ghosting me and being distant, but when I asked
+      her if she still liked me, she said she did! and then out of nowhere she dumped
+      me!
+  utter_warning:
+  - text: Oh I understand. 
   utter_closing:
   - text: Bye
 actions:
 - utter_greeting
-- utter_stressor
-- respond_background_question
-- utter_nudging_response
-- respond_question
+- utter_conventional_opening
+- respond_open_question
+- utter_facilitate
+- respond_reflect
+- action_ask_for_advice
+- action_suicide
 - respond_support
+- respond_affirm
+- action_ask_personal_info
 - utter_closing
 - action_my_fallback

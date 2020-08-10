@@ -57,7 +57,7 @@ html {
 
 .chats {
     /* display: none; */
-    height: 385px;
+    height: 480px;
     padding: 2px;
     border-radius: 1px;
     overflow-y: scroll;
@@ -216,6 +216,14 @@ div.chats::-webkit-scrollbar {
     display: none;
     float:right;
     width: 60%;
+}
+
+#submitButton {
+    display: none;
+}
+
+.bye {
+    display: none;
 }
 
 textarea {
@@ -552,7 +560,7 @@ div.content_data::-webkit-scrollbar {
 
 .menuChips {
     display: block;
-    background: #2c53af;
+    background: #5a17ee;
     color: #fff;
     text-align: center;
     padding: 5px;
@@ -862,7 +870,7 @@ ul.collapsible>li:last-child .collapsible-body {
     padding: 10px;
 }
 
-.feedbackHint {
+.mentorHint {
     margin-top: 5px;
     margin-left: 5%;
     max-width: 60%;
@@ -873,29 +881,29 @@ ul.collapsible>li:last-child .collapsible-body {
     background: white;
 }
 
-.feedbackHint-body {
+.mentorHint-body {
     padding: 15px;
 }
 
-.feedbackHint-header {
+.mentorHint-header {
     font-weight: bold;
     color: #2c53af;
 }
 
-ul.feedbackHint>li:first-child .feedbackHint-header {
+ul.mentorHint>li:first-child .feedbackHint-header {
     border-radius: 20px 20px 0px 0px;
 }
 
-ul.feedbackHint>li:last-child .feedbackHint-header {
+ul.mentorHint>li:last-child .feedbackHint-header {
     color: #2c53af;
     border-radius: 0px 0px 20px 20px;
 }
 
-ul.feedbackHint>li:last-child .feedbackHint-body {
+ul.mentorHint>li:last-child .feedbackHint-body {
     border-bottom: none;
 }
 
-.feedbackHint-header {
+.mentorHint-header {
     padding: 10px;
 }
 
