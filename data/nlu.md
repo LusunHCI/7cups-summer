@@ -178,7 +178,7 @@ Did she end the relationship?
 - It seems like you are sad	
 - It seems like you are frustrated 
 
-## intent: empathy/self_disclosure
+## intent: empathy
 - I felt the same way with my ex.	
 - If i were in your situation then i would want some kind of closure. and i think it's a good idea to take anything other than a "yes, right now" as a "no"	
 - You can always change your mind
@@ -189,7 +189,7 @@ Did she end the relationship?
 - Actually I have been in your shoes before	
 - I have been through similar situation
 
-## intent: empathy/offer_condolence
+## intent: condolence
 - I'm so sorry to hear that.	
 - Well that is very weird, I am sorry you have to feel such a pain :(	
 - I am so sorry for you, because no one should ever feel what you feel :/ 	
@@ -207,6 +207,7 @@ Did she end the relationship?
 - Sure, let me tell you how I think you get through this anxiety. I can give you some advice on this.
 - Sure, let me tell you how I think you get through this anxiety. I can give you some advice on this.
 - Sure, let me tell you how I think you get through this anxiety. I can give you some advice on this.
+
 
 ## intent: support/understanding
 - Oh i see what you mean...	
@@ -301,6 +302,7 @@ Did she end the relationship?
 ## intent: giving_information
 - Here's a self-help guide for getting through breakups that might be helpful for you https://www.7cups.com/breakup-advice/	
 - 7 cups has a really great link on how to deal with breakups- would you like me to send it to you?
+- Sorry, this situation is beyound my ability. I will make a referral to professional therapist as soon as possible.
 
 
 ## intent: clarification
@@ -332,6 +334,7 @@ Did she end the relationship?
 - Tell me about your sex life	
 - Sup	
 - How's it hanging
+- You'd better not. You will regret if you do that. 
 
 ## intent: closing
 - No problem darling! i do have to leave now	

@@ -36,19 +36,33 @@ $(document).ready(function() {
     arrUrl = url.split("%3F");
     para = arrUrl[1];
     message_count=0;
-    intentsDict={"conventional_opening":"conventional_opening: The listener is being courteous and seguing into discussion of the member's stressor. <br/> Ex. How are you?, What's going on?"
-    , "greeting":"greeting: the listener says hi to start the conversation. <br/> Ex: Hi, welcome to 7cups"
-    , "open_question":"open_question:  The listener is trying to gather information, understand, or elicit the client's story.  <br/> Ex. How long were you and your ex together?"
-    , "facilitate":"facilitate: The listener is trying to get more details from the member regarding their conflict. <br/> Ex. Can you tell me more about what happened?"
-    , "reflect": "reflect: The listener is reflecting their understanding of the information they have recieved from the member. <br/> Ex. So you were together for 6 months. "
-    , "empathy": "empathy: The listener is demonstrating their empathy. <br/> Ex. I felt the same way with my ex."
-    , "support": "support: These are generally sympathetic, compassionate, or understanding comments. They have the quality of agreeing or siding with the client."
-    , "affirm": "affirm: The counselor says something positive or complimentary to the client. It may be in the form of expressed appreciation, confidence or reinforcement. The counselor comments on the client’s strengths or efforts."
-    , "giving information": "giving information: The counselor gives information to the client, explains something, educates or provides feedback or discloses personal information."
-    , "clarification": "The listener is confused and wants more details or clarification. <br/> Ex. What do you mean?"
-    , "warning": "warning: The listener is trying to remind the member that 7 cups does not allow listeners to provide advice to members. <br/> Ex. Sorry, I'm not really supposed to do that."
-    , "confront": "confront: 'expert override' of what the client says. The counselor directly disagrees, argues, corrects, shames, blames, seeks to persuade, criticizes, judges, labels, moralizes, ridicules, or questions the client's honesty. Re-emphasizing negative consequences that are already known by the client constitutes a Confront, except in the context of a Reflection."
-    , "closing":"The listener is about to courteously end the conversation. <br/> Ex. Alright, bye now! Have an awesome day!"};
+    intentsDict={
+    	"conventional_opening":"conventional_opening: The listener is being courteous and seguing into discussion of the member's stressor. <br/> Ex. How are you?, What's going on?"
+    	, "greeting":"greeting: the listener says hi to start the conversation. <br/> Ex: Hi, welcome to 7cups"
+    	, "open_question":"open_question:  The listener is trying to gather information, understand, or elicit the client's story.  <br/> Ex. How long were you and your ex together?"
+    	, "facilitate":"facilitate: The listener is trying to get more details from the member regarding their conflict. <br/> Ex. Can you tell me more about what happened?"
+    	, "reflect": "reflect: The listener is reflecting their understanding of the information they have recieved from the member. <br/> Ex. So you were together for 6 months. "
+    	, "empathy": "empathy: The listener is demonstrating their empathy. <br/> Ex. I felt the same way with my ex."
+    	, "support": "support: These are generally sympathetic, compassionate, or understanding comments. They have the quality of agreeing or siding with the client."
+    	, "affirm": "affirm: The counselor says something positive or complimentary to the client. It may be in the form of expressed appreciation, confidence or reinforcement. The counselor comments on the client’s strengths or efforts."
+    	, "giving information": "giving information: The counselor gives information to the client, explains something, educates or provides feedback or discloses personal information."
+    	, "clarification": "The listener is confused and wants more details or clarification. <br/> Ex. What do you mean?"
+    	, "warning": "warning: The listener is trying to remind the member that 7 cups does not allow listeners to provide advice to members. <br/> Ex. Sorry, I'm not really supposed to do that."
+    	, "confront": "confront: 'expert override' of what the client says. The counselor directly disagrees, argues, corrects, shames, blames, seeks to persuade, criticizes, judges, labels, moralizes, ridicules, or questions the client's honesty. Re-emphasizing negative consequences that are already known by the client constitutes a Confront, except in the context of a Reflection."
+    	, "closing":"The listener is about to courteously end the conversation. <br/> Ex. Alright, bye now! Have an awesome day!"
+    };
+    responseDict={
+    	"utter_greeting": "Hello"
+    	,"utter_not_great": "I'm not great."
+    	,"utter_introduce_breakup": "My girlfriend-- or I should say, now ex-- recently broke up with me. "
+    	,"utter_facilitate_atfirst": "So at first it seemed like she was very into me and affectionate, so things were going really well."
+    	,"utter_time_passed": "But as time passed, she started to tighten up and I thought it was me but she kept reassuring me that she was still interested."
+    	,"utter_end_relationship": "But then she slowly started to distance herself which scared me again."
+    	,"utter_never_loved": "I'm scared that if she never loved me, maybe no one will."
+    	,"utter_wanna_better": "I just want to feel better."
+    	,"utter_warning": "Oh I'm sorry I didn't know that. "
+    	,"utter_inappropriate": "This conversation is not helping at all. I don't want to talk to you any more. See you never."
+    }
     currentShow=0;
 
     //if you want the bot to start the conversation
@@ -139,6 +153,7 @@ $("#sendButton").on("click", function(e) {
 
 //==================================== Set user response =====================================
 function setUserResponse(message) {
+	message_count++;
 	var UserResponse = '<img class="userAvatar" src=' + "../static/img/userAvatar.jpg" + '><p class="userMsg">' + message + ' </p><div class="clearfix"></div>';
 	$(UserResponse).appendTo(".chats").show("slow");
 
@@ -198,7 +213,6 @@ function send(message) {
         }
     });
 
-	message_count++;
 	var message_id=para+message_count.toString();
 
 	$.ajax({
@@ -221,7 +235,6 @@ function send(message) {
 			appendIntents(intent, message,ranking);
 		}
 	});
-
 }
 
 //===================append Intents and scores to interface ===================================
@@ -232,43 +245,65 @@ function appendIntents(intent, message,ranking) {
 	$(tempdiv).appendTo(".feedback");
 	divid='#'+divid;
 	$(divid).hide();
-	var listenerMessage='<h6>Your message</h6> <div class="lmsg"> <p class="listenerMsg">' + message + '</p> </div> <div class="selectIntents"> <p> The model detected the intention of this message as "' +intent['name']+ '" with the confidence as ' +intent['confidence']+ '/1.0. </p></div>';
+	var listenerMessage='<h6>Your message</h6> <div class="lmsg"> <p class="listenerMsg">' + message + '</p> </div> <div class="selectIntents"> <p> The model detected the intention of this message as "' +intent['name'].replace('_',' ')+ '" with the confidence as ' +Number(intent['confidence']).toFixed(2)+ '/1.0. </p></div>';
 	$(listenerMessage).appendTo(divid);
-	var intentCard='<div class="intentCard"><div class="card"><div class="card-content">'+ intentsDict[intent['name']] +'</div> </div> </div>';
+	var intentCard='<div class="intentCard"><div class="card"><div class="card-content">'+ intentsDict[intent['name']].replace('_',' ') +'</div> </div> </div>';
 	$(intentCard).appendTo(divid);
 	var isCorrect="<div class=isCorrect><p> Did this capture your intention?</p></div>";
 	$(isCorrect).appendTo(divid);
 	var choiceButton='<div class="choiceButton"> <input type="text" class="hiddenInput" name="yesno'+message_count.toString()+'" id="yesno'+message_count.toString()+'" style="height:1px;display:none;"> <br/> <button class="yesintent btn" id="yesIntent'+message_count.toString()+'" onclick="yesintent('+message_count.toString()+')" type="button" style="background-color:white;border-radius:30px; border: 2px solid #5a17ee; color: #5a17ee"> Yes </button>  <button class="nointent btn" id="noIntent'+message_count.toString()+'" onclick="nointent('+message_count.toString()+')" type="button" style="background-color:white;border-radius:30px; border: 2px solid #5a17ee; color: #5a17ee"> No </button> </div>';
 	$(choiceButton).appendTo(divid);
-	var selectDesc="<div class='yesDesc' id='yesDesc"+message_count.toString()+"'><p style='float:left; width: 100%;'>If you think this is your intent, press the Next button. </p> </div> <div class='noDesc' id='noDesc"+message_count.toString()+"'> <p style='float:left; width: 100%;'> If not, please select one intent from below that could better capture your intention in the message.</p> </div>";
+	var selectDesc="<div class='yesDesc' id='yesDesc"+message_count.toString()+"'> <p style='float:left; width: 100%;'></p> <p style='float:left; width: 100%;'>If you think this is your intent, press the Next button. </p> </div> <div class='noDesc' id='noDesc"+message_count.toString()+"'> <p style='float:left; width: 100%;'></p> <p style='float:left; width: 100%;'> If not, please select one intent from below that could better capture your intention in the message.</p> </div>";
 	$(selectDesc).appendTo(divid);
-	var intentRanking="<div class='intentOption' id='intentOption"+message_count.toString()+"'> <div class='input-field col s12' style='float:left;width:100%;'> <select name='intentselect"+message_count.toString()+"'> <option value=''> "+ intent['name'] +"</option>";
+	var intentRanking="<div class='intentOption' id='intentOption"+message_count.toString()+"'> <div class='input-field col s12' style='float:left;width:100%;'> <select name='intentselect"+message_count.toString()+"'> <option value=''> "+ intent['name'].replace('_',' ') +"</option>";
 	for(i=0;i<ranking.length;i++) {
-		intentRanking+="<option value='"+ranking[i]['name']+"'>"+ranking[i]['name']+'  (confidence='+ranking[i]['confidence']+")</option>";
+		if(Number(ranking[i]['confidence']).toFixed(2)>=0.01) {
+			intentRanking+="<option value='"+ranking[i]['name']+"'>"+ranking[i]['name'].replace('_',' ')+'  (confidence='+Number(ranking[i]['confidence']).toFixed(2)+")</option>";
+		}
 	}
-	intentRanking+="</select> </div> </div>"
+	intentRanking+="</select> </div>";
+	intentRanking+='<i class="material-icons" onclick="addNewIntents('+message_count.toString()+')">add</i> Add New Intent</div>';
 	$(intentRanking).appendTo(divid);
+	var otherIntent="<div class='otherIntent' id='otherIntent"+message_count.toString()+"'><div class='card'><div class='input-field col s6' style='width:50%;position:relative;left:10px;'> <input name='newIntent"+message_count.toString()+"' id='newIntent"+message_count.toString()+"' type='text'><label for='newIntent"+message_count.toString()+"'>New Intent Name</label></div> <div class='input-field col s12'><textarea class='materialize-textarea' name='newExplaination"+message_count.toString()+"' id='newExplaination"+message_count.toString()+"' style='width:90%;position:relative;left:10px;'></textarea> <label for='newExplaination"+message_count.toString()+"'>New Intent Explaination</label></div> </div> </div>";
+	$(otherIntent).appendTo(divid);
+}
+//====================================== add new intents ===========================================
+function addNewIntents(msgid) {
+	$('#otherIntent'+msgid).show();
+	var terminalResultsDivC = document.getElementById("feedback");
+	terminalResultsDivC.scrollTop = terminalResultsDivC.scrollHeight;
 }
 //====================================== append Actions to the interface ===========================
-function appendActions(botmessage,msg_type) {
+function appendActions(botmessage,msg_type,msgid) {
 	if(msg_type==0) {
-		var divid='msg'+message_count.toString();
+		var divid='msg'+msgid;
 		var tempdiv="<div class='codesign' id='"+divid+"'> </div>";
 		$(tempdiv).appendTo(".feedback");
 		divid='#'+divid;
 		$(divid).hide();
 		var botMessage='<h6>Chatbot response</h6> <div class="bmsg"> <p class="chatbotResponse">' + botmessage + '</p> </div> <div class="selectResponse"> <p> Does the chatbot response seem reasonable? If not, please select no to improve the resonse. </p></div>';
 		$(botMessage).appendTo(divid);
-		var isResonable='<div class="choiceButton"> <input type="text" class="hiddenInput" name="yesno'+message_count.toString()+'" id="yesno'+message_count.toString()+'" style="height:1px;display:none;"> <br/> <button class="yesaction btn" id="yesAction'+message_count.toString()+'" onclick="yesaction('+message_count.toString()+')" type="button" style="background-color:white;border-radius:30px; border: 2px solid #5a17ee; color: #5a17ee"> Yes </button>  <button class="noaction btn" id="noAction'+message_count.toString()+'" onclick="noaction('+message_count.toString()+')" type="button" style="background-color:white;border-radius:30px; border: 2px solid #5a17ee; color: #5a17ee"> No </button> </div>';
+		var isResonable='<div class="choiceButton"> <input type="text" class="hiddenInput" name="yesno'+msgid+'" id="yesno'+msgid+'" style="height:1px;display:none;"> <br/> <button class="yesaction btn" id="yesAction'+msgid+'" onclick="yesaction('+msgid+')" type="button" style="background-color:white;border-radius:30px; border: 2px solid #5a17ee; color: #5a17ee"> Yes </button>  <button class="noaction btn" id="noAction'+msgid+'" onclick="noaction('+msgid+')" type="button" style="background-color:white;border-radius:30px; border: 2px solid #5a17ee; color: #5a17ee"> No </button> </div>';
 		$(isResonable).appendTo(divid);
-		var yesGuide="<div class='yesGuide' id='yesGuide"+message_count.toString()+"'><p style='float:left; width: 100%;'>If you think this response is no need to be changed, press the Next button. </p> </div>";
+		var yesGuide="<div class='yesGuide' id='yesGuide"+msgid+"'><p style='float:left; width: 100%;'>If you think this response is no need to be changed, press the Next button. </p> </div>";
 		$(yesGuide).appendTo(divid);
-		var actionRanking='<div class="actionOption" id="actionOption'+message_count.toString()+'"> <div class="input-field col s12" style="float:left;width:100%;"> <select name="actionselect'+message_count.toString()+'"> <option value=""> '+ botmessage +'</option>';
-		actionRanking+="</select> </div> </div>";
-		$(actionRanking).appendTo(divid);
-		$('select').formSelect();
-		var otherResponse="<div class='otherResponse' id='otherResponse"+message_count.toString()+"'><p>What other ways could the chatbot respond with this type of “introduce stressor” action?</p> <textarea class='materialize-textarea' name='other"+message_count.toString()+"' id='other"+message_count.toString()+"' style='float:left;width:100%;'></textarea>  </div>";
-		$(otherResponse).appendTo(divid);
+		$.ajax({
+			url:"http://localhost:5005/conversations/"+para+"/predict",
+			type:"POST",
+			contentType: "application/json",
+			success: function(json) {
+				var scores=json['scores'];
+				var actionRanking='<div class="actionOption" id="actionOption'+msgid+'"> <div class="input-field col s12" style="float:left;width:100%;"> <select name="actionselect'+msgid+'" style="overflow:scroll;"> <option value=""> '+ botmessage +'</option>';
+				for(i=0;i<scores.length;i++) {
+					actionRanking+="<option value='"+responseDict[scores[i]['action']]+"'>"+responseDict[scores[i]['action']]+"</option>";
+				}
+				actionRanking+="</select> </div> </div>";
+				$(actionRanking).appendTo(divid);
+				$('select').formSelect();
+				var otherResponse="<div class='otherResponse' id='otherResponse"+msgid+"'><p>What other ways could the chatbot respond with this type of “introduce stressor” action?</p> <textarea class='materialize-textarea' name='other"+msgid+"' id='other"+msgid+"' style='float:left;width:100%;'></textarea>  </div>";
+				$(otherResponse).appendTo(divid);
+			}
+		});
 	}
 }
 //=================== next previous and submit button ==================================================
@@ -374,6 +409,7 @@ function setBotResponse(response) {
                 	var BotResponse = '<img class="botAvatar" src="../static/img/sara_avatar.png"/><p class="botMsg">' + response[i].text + '</p><div class="clearfix"></div>';
                 	$(BotResponse).appendTo(".chats").hide().fadeIn(1000);
                 	message_count++;
+                	appendActions(response[i].text,msg_type,message_count);
                 }
 
                 //check if the response contains "images"
@@ -415,7 +451,6 @@ function setBotResponse(response) {
                 	data: JSON.stringify({ 'message_id': message_id, 'message': botmessage, 'chatroom_id': para, 'message_type': msg_type, 'sender_id': 0}),
                 	success: function() {
                 		console.log(botmessage);
-                		appendActions(botmessage['text'],msg_type);
                 	}
                 });
             }
@@ -437,7 +472,7 @@ function addSuggestion(textToAdd) {
 		$(' <div class="singleCard"> <div class="suggestions"><div class="menu"></div></div></div>').appendTo(".chats").hide().fadeIn(1000);
         // Loop through suggestions
         for (i = 0; i < suggLength; i++) {
-        	$('<div class="menuChips" data-payload=\'' + (suggestions[i].payload) + '\'>' + suggestions[i].title + "</div>").appendTo(".menu");
+        	$('<div class="menuChips" data-payload="' + (suggestions[i].payload) + '">' + suggestions[i].title + '</div>').appendTo(".menu");
         }
         scrollToBottomOfResults();
     }, 500);
@@ -461,7 +496,7 @@ $(document).on("click", ".menu .menuChips", function() {
 
 $("#endConversation").click(function() {
 	$('.experience_instruction').remove();
-	var codesign_instruction="<p>In this section of the codesign, please interact with the chatbot again, but as you do so, correct the chatbot by answering the corresponding questions regarding Intents, Responses and Feedback.<br/>  <br/> Intents refer to the goal or intention of any message you send to the chatbot. Responses are given by the chatbot based on the intent. Below are examples of corresponding intents and responses with the confidence score indicating the level of correlation between the intent and the response. <br/>  <br/> <table> <tbody> <tr> <td> Listener: “Hi!” </td> <td> Intent: greeting (confidence score = 0.98) </td> </tr> <tr> <td> Chatbot: “Hello”</td> <td>Response: greeting  </td> </tr> </tbody> </table> <br/>  <br/> The chatbot understood the listener’s intent of greeting saying “Hi” and responded with “Hello”. <br/> <br/> <table> <tbody> <tr> <td>Listener: “What happened?” </td> <td>Intent: stressor inquiry (confidence score = 0.88) </td> </tr> <tr> <td> Chatbot: “I just went through a breakup” </td> <td> Response: introduce stressor </td> </tr> </tbody> </table> <br/> <br/> The chatbot understood the listener’s intent of stressor_inquiry saying “What happened?” and responded with “I just went through a breakup” .  <br/>  <br/> As you look over the Intents, Responses, and Feedback please edit or provide feedback regarding the content of the chatbot’s responses to your messages. When you are done, click “End the conversation”.</p>";
+	var codesign_instruction="<p>In this section of the codesign, we will replay your conversation with the chatbot, during this process, please help us correct the chatbot by answering the corresponding questions regarding Intents, Responses, and Feedback. <br/>  <br/> Intents refer to the goal or intention of any message you send to the chatbot. Responses are given by the chatbot based on the intent. Below is an example of a corresponding intent and response with the confidence score indicating the level of correlation between the intent and the response. <br/>  <br/> <table> <tbody> <tr> <td> Listener: “Hi!” </td> <td> Intent: greeting (confidence score = 0.98) </td> </tr> <tr> <td> Chatbot: “Hello”</td> <td>Response: Hello  </td> </tr> </tbody> </table> <br/>  <br/> The chatbot understood the listener’s intent of greeting saying “Hi” and responded with “Hello”. <br/> <br/> <table> As you look over the Intents and Responses please edit or provide feedback regarding the content of the chatbot’s responses to your messages. When you are done, click “End the conversation”.</p>";
 	$(codesign_instruction).appendTo(".instruction");
 	$(".startButton").toggle();
 	$('#userInput').attr('disabled',true);
@@ -592,11 +627,11 @@ function createCollapsible(data) {
     	'</li>'
     	list += item;
     	var hintItem = '<div id="hint'+para+message_count.toString()+i.toString()+'"><ul><li>' +
-        '<div class="mentorHint-header">' + data[i].title + '</div>' +
-        '<div class="mentorHint-body"><span>' + data[i].description + '</span></div>' +
-        '</ul></li></div>';
-        hintItem+='<div class="input-field col s6"> <textarea id="textarea2" class="materialize-textarea" data-length="120"></textarea> <label for="textarea2">Please help us improve this hint</label> </div>'
-        $(hintItem).appendTo(divid);
+    	'<div class="mentorHint-header">' + data[i].title + '</div>' +
+    	'<div class="mentorHint-body"><span>' + data[i].description + '</span></div>' +
+    	'</ul></li></div>';
+    	hintItem+='<div class="input-field col s6"> <textarea id="textarea2" class="materialize-textarea" data-length="120"></textarea> <label for="textarea2">Please help us improve this hint</label> </div>'
+    	$(hintItem).appendTo(divid);
 
     }
     var contents = '<ul class="collapsible">' + list + '</uL>';

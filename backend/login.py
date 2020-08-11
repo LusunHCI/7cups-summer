@@ -91,6 +91,7 @@ def submitCodesign():
 		items = form_json.items()
 		msgid=[]
 		for key, value in items:
+			value=value.replace('%20',' ')
 			print(str(key) + '   ' + str(value))
 			if value=='':
 				value='null'

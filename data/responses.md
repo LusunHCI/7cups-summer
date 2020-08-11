@@ -55,13 +55,6 @@
 * reflect/label_emotion
     - yeah
 
-## self_disclosure
-* empathy/self_disclosure
-    - oh really? can you tell me more?
-
-## offer_condolence
-* empathy/offer_condolence
-    - I just want to feel better
 
 ## compassion
 * support/compassion

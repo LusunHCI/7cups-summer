@@ -229,6 +229,15 @@ function send(message) {
             appendIntents(intent, message,ranking);
         }
     });
+    $.ajax({
+        url:"http://localhost:5005/conversations/"+para+"/predict",
+        type:"POST",
+        contentType: "application/json",
+        //data: JSON.stringify({ text: message}),
+        success: function(json) {
+            console.log(json);
+        }
+    });
 
 }
 //===================append Intents and scores to interface ===================================

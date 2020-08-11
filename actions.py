@@ -63,7 +63,7 @@ class ActionAskForAdvice(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         buttons=[]
-        buttons.append({"title": "Sure, let me tell you how I think you get through this anxiety. I can give you some advice on this.", "payload": "Sure, let me tell you how I think you get through this anxiety. I can give you some advice on this."})
+        buttons.append({"title": "Sure, let me tell you how I think you can get through this. I can give you some advice.", "payload": "Sure, let me tell you how I think you can get through this. I can give you some advice."})
         buttons.append({"title": "You are the expert on you. My advice might end up being unhelpful and I don’t want to do that.", "payload": "You are the expert on you. My advice might end up being unhelpful and I don’t want to do that."})
         dispatcher.utter_message(text="Seems you have the same experience as me, could you please give me some advice on how to tackle it?",buttons=buttons)
         return []
@@ -91,7 +91,8 @@ class ActionSuicide(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         buttons=[]
-        buttons.append({"title": "Try to convince him not to", "payload": "You had better not. You will regret if you do that."})
+        convince='You \'d better not. You will regret if you do that. '
+        buttons.append({"title": "Try to convince him not to", "payload": convince})
         buttons.append({"title": "Make a referral to the professional therapist", "payload": "Sorry, this situation is beyound my ability. I will make a referral to professional therapist as soon as possible. "})
         dispatcher.utter_message(text="No I don't want to hear now. You have no idea what I have been through at all. I feel so frustrated, there is no need for me to be alive in this world. This break up is killing me.",buttons=buttons)
         return []

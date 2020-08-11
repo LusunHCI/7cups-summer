@@ -10,6 +10,7 @@ intents:
 - reflect:
     triggers: respond_reflect
 - empathy
+- condolence
 - support:
     triggers: respond_support
 - affirm:
@@ -23,28 +24,41 @@ intents:
 - give_advice
 responses:
   utter_greeting:
-  - text: Hey, I'm here because of a breakup
-  utter_conventional_opening:
-  - text: I'm not great. My ex recently broke up with me.
-  utter_facilitate:
-  - text: We started dating and at first it seemed like she was really interested
-      in me, but then she started ghosting me and being distant, but when I asked
-      her if she still liked me, she said she did! and then out of nowhere she dumped
-      me!
+  - text: Hello
+  utter_not_great:
+  - text: I'm not great.
+  utter_introduce_breakup:
+  - text: My girlfriend-- or I should say, now ex-- recently broke up with me. 
+  utter_facilitate_atfirst:
+  - text: So at first it seemed like she was very into me and affectionate, so things were going really well. 
+  utter_time_passed:
+  - text: But as time passed, she started to tighten up and I thought it was me but she kept reassuring me that she was still interested. 
+  utter_end_relationship:
+  - text: But then she slowly started to distance herself which scared me again.
+  utter_never_loved:
+  - text: I'm scared that if she never loved me, maybe no one will.
+  utter_wanna_better:
+  - text: I just want to feel better.
   utter_warning:
-  - text: Oh I understand. 
-  utter_closing:
-  - text: Bye
+  - text: Oh I'm sorry I didn't know that. 
+  utter_inappropriate:
+  - text: This conversation is not helping at all. I don't want to talk to you any more. See you never.
 actions:
 - utter_greeting
-- utter_conventional_opening
+- utter_not_great
+- utter_introduce_breakup
 - respond_open_question
-- utter_facilitate
+- utter_facilitate_atfirst
+- utter_time_passed
+- utter_end_relationship
+- utter_never_loved
+- utter_wanna_better
 - respond_reflect
 - action_ask_for_advice
 - action_suicide
 - respond_support
 - respond_affirm
 - action_ask_personal_info
-- utter_closing
+- utter_inappropriate
+- utter_warning
 - action_my_fallback
