@@ -49,11 +49,11 @@
 
 ## simple_reflect
 * reflect/simple_reflect
-    - yes that's right
+    - Yes that's right
 
 ## label_emotion
 * reflect/label_emotion
-    - yeah
+    - Yeah
 
 
 ## compassion
@@ -65,11 +65,11 @@
 
 ## understanding
 * support/understanding
-    - :)
+    - Yeah
 
 ## support_user_side
 * support/support_user_side
-    - I know, but I still feel frustrated. My heart is broken and I don't know what to do
+    - I know, but I still feel frustrated. My heart is broken and I don't know what to do.
 
 ## encourage_self
 * affirm/encourage_self	

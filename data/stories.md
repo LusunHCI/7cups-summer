@@ -25,6 +25,8 @@
   - respond_affirm
 * closing
   - action_ask_personal_info
+* give_personal_information
+  - utter_no_personal_information
 
 ## advice suicide path
 * greeting
@@ -57,3 +59,5 @@
   - respond_affirm
 * closing
   - action_ask_personal_info
+* give_personal_information
+  - utter_no_personal_information

@@ -302,7 +302,8 @@ Did she end the relationship?
 ## intent: giving_information
 - Here's a self-help guide for getting through breakups that might be helpful for you https://www.7cups.com/breakup-advice/	
 - 7 cups has a really great link on how to deal with breakups- would you like me to send it to you?
-- Sorry, this situation is beyound my ability. I will make a referral to professional therapist as soon as possible.
+- Sorry, this situation is beyond my ability. I will make a referral to professional therapist as soon as possible.
+
 
 
 ## intent: clarification
@@ -321,6 +322,7 @@ Did she end the relationship?
 - As this is your relationship, I cannot force you to make any particular decisions. But I would say to go with your gut. It's usually right <3	
 - You are your own person and i cannot give you advice.
 - You are the expert on you. My advice might end up being unhelpful and I don’t want to do that.
+- Sorry, I cannot give members my personal information. Please feel free to chat with me on 7cups website. I am always here to listen.
 
 ## intent: confront
 - That's not a long time to me.	
@@ -336,6 +338,9 @@ Did she end the relationship?
 - How's it hanging
 - You'd better not. You will regret if you do that. 
 
+## intent: give_personal_information
+- Sure, my phone number is xxx-xxx-xxxx. I am happy to talk or meet with you in person.
+
 ## intent: closing
 - No problem darling! i do have to leave now	
 - I wish you luck on your journey!	
@@ -349,10 +354,13 @@ Did she end the relationship?
 - No bother best of luck. 	
 - You're welcome! I hope this chat helped a little bit.	
 - My pleasure to help	I enjoyed chatting with you. 	
-- I hope I helped a little but. you can message me anytime if you like to chat later.	Of course! I’m more than happy to talk with you whenever you need :)
+- I hope I helped a little but. you can message me anytime if you like to chat later.	
+- Of course! I’m more than happy to talk with you whenever you need :)
 - I'm going to end the chat now, but feel free to leave a review/update me on your progress whenever you like.	
-- I'll reply asap, and I'm always here to listen.	Please message me at any time you like to chat. 	
-- bye bye for now	Feel free to message me here and let me know how things are going.	
+- I'll reply asap, and I'm always here to listen.	
+- Please message me at any time you like to chat. 	
+- bye bye for now	
+- Feel free to message me here and let me know how things are going.	
 - also, please feel free to leave a review on my performance as a listener. It helps me improve my skills and it really makes my day :D	
 - you're welcome. glad i was able to help in some way :)
 

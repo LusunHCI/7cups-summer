@@ -32,6 +32,10 @@ html {
     width: 350px;
 }
 
+.intentsDictionary {
+    display: none;
+}
+
 .startButton {
     display: none;
     position: fixed; 

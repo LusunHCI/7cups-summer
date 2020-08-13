@@ -22,17 +22,20 @@ intents:
 - inappropriate
 - closing
 - give_advice
+- give_personal_information
 responses:
   utter_greeting:
-  - text: Hello
+  - text: Hello. Are you there?
   utter_not_great:
   - text: I'm not great.
   utter_introduce_breakup:
-  - text: My girlfriend-- or I should say, now ex-- recently broke up with me. 
+  - text: My girlfriend-- or I should say, now ex-- recently broke up with me.
   utter_facilitate_atfirst:
-  - text: So at first it seemed like she was very into me and affectionate, so things were going really well. 
+  - text: So at first it seemed like she was very into me and affectionate, so things
+      were going really well.
   utter_time_passed:
-  - text: But as time passed, she started to tighten up and I thought it was me but she kept reassuring me that she was still interested. 
+  - text: But as time passed, she started to tighten up and I thought it was me but
+      she kept reassuring me that she was still interested.
   utter_end_relationship:
   - text: But then she slowly started to distance herself which scared me again.
   utter_never_loved:
@@ -40,9 +43,12 @@ responses:
   utter_wanna_better:
   - text: I just want to feel better.
   utter_warning:
-  - text: Oh I'm sorry I didn't know that. 
+  - text: Oh I see. Thank you.
   utter_inappropriate:
-  - text: This conversation is not helping at all. I don't want to talk to you any more. See you never.
+  - text: This conversation is not helping at all. I don't want to talk to you any
+      more. See you never.
+  utter_no_personal_information:
+  - text: Oh maybe I should not ask that. Thank you though.
 actions:
 - utter_greeting
 - utter_not_great
@@ -62,3 +68,4 @@ actions:
 - utter_inappropriate
 - utter_warning
 - action_my_fallback
+- utter_no_personal_information
