@@ -95,17 +95,25 @@ def submitCodesign():
 			print(str(key) + '   ' + str(value))
 			if value=='':
 				value='null'
-			mid=re.findall(r"\d",key)[0]
-			field=key.replace(mid,'')
+			mid=re.findall(r"\d",key)
+			num=""
+			for n in range(0,len(mid)):
+				num+=mid[n]
+			print(num)
+			field=key.replace(num,'')
 			print(field)
-			if userid+mid not in msgid:
-				msgid.append(userid+mid)
+			if field=='intentselect':
+				if value!='Add_More':
+					value=value.split(":")[0]
+					print(value)
+			if userid+num not in msgid:
+				msgid.append(userid+num)
 				sql = "INSERT INTO codesign (message_id, chatroom_id ,"+field+") VALUES (%s,%s,%s)"
-				val=(userid+mid,userid,value)
+				val=(userid+num,userid,value)
 				mycursor.execute(sql,val)
 			else:
 				value=value.replace("'","_")
-				sql = "UPDATE codesign set "+field+"='"+value+"' where message_id="+(userid+mid)
+				sql = "UPDATE codesign set "+field+"='"+value+"' where message_id="+(userid+num)
 				mycursor.execute(sql)
 		mydb.commit()
 		mycursor.close()

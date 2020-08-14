@@ -1,35 +1,23 @@
 ## relationship_length
 * open_question/relationship_length
-    - we were together for 6 months and then she broke up with me 2 weeks ago.	
-    - 6 months. we were together 6 whole months!	
-    - the relationship was technically 6 months, although she would ghost me for weeks at a time.	we lasted 6 months.	
-    - the relationship was 6 months so I thought it was pretty serious.
+    - We were together for 6 months and then she broke up with me 2 weeks ago.	
+    
 
 ## age_inquiry
 * open_question/age_inquiry
     - I am 22 years old and my ex is 20.	
-    - I'm 22, she was 20.	
-    - I'm 22. 
-    - My ex was two years younger	
-    - I just graduated college, I'm 22. She's slightly younger, 20.	
-    - I'm 22 and she's 20.
+
+## distant_how
+* open_question/distant_how
+    - She would screen my calls and texts and if i'd see her in person she'd be unusually quiet and aloof.
 
 ## reason
 * open_question/reason
     - She told me she broke up with me because she wasn't interested in me. 	
-    - She broke up with me because "she didn't have feelings for me" even though she kept telling me she did when we were together	
-    - Honestly I don't really know why she broke up with me. She said it was because she didn't have any feelings, but earlier in the relationship she told me she was falling in love with me.	
-    - She broke up with me, but her reasoning doesn't make any sense. She claims she never had feelings for me, but during the 6 months we were together she told me she did!	
-    - She claims she never felt the same way I did, but throughout our relationship when I confronted her about JUST THAT she kept assuring me she was interested
 
 ## inquiry_feelings
 * open_question/inquiry_feelings
-    - I just can't get over it. Like how can she go from saying she's falling for me to saying she never had feelings for me at all.	
-    - I'm just filled with so much hate over her lying. How could she have lied to me like that?
-    - It's the lying that's really affecting me. I don't understand how you can go from falling in love with somebody to saying you never had feelings in the first place. 	
-    - I just can't believe this is happening. We were both falling in love and now it's all over. 
-    - I just don't understand why she didn't breakup with me when she started ghosting me the first time. Why did she have to lie and say she was falling in love with me if she really wasn't and was going to dump me anyway	
-    - I'm pissed. She lied, strung me along, and made me believe she was falling for me when in reality she didn't feel anything.
+    - I just can't get over it. Like how can she go from saying she's falling for me to saying she never had feelings for me at all. Like how can she go from saying she's falling for me to saying she never had feelings for me at all. I'm just filled with so much hate over her lying. How could she have lied to me like that?
 
 ## inquiry_ex_feelings
 * open_question/inquiry_ex_feelings
@@ -41,41 +29,66 @@
 
 ## inquiry_post_contact
 * open_question/inquiry_post_contact
-    - I've been trying to avoid her, but she works at this cafe I frequent
+    - I've been trying to avoid her, but she works at this cafe I frequent.
 
 ## inquiry_ending_process
 * open_question/inquiry_ending_process
-    - Yeah sometimes at the cafe she works at that I usually go to before class. 
+    - It was her who dumped me. We started dating and at first it seemed like she was really interested in me, but then she started ghosting me and being distant, but when I asked her if she still liked me, she said she did! and then out of nowhere she dumped me!
+
+## support_inquiry
+* open_question/support_inquiry
+    - I mean, I just need someone to listen to me and talk me through this breakup, I don't know what else I can really ask from you.
 
 ## simple_reflect
 * reflect/simple_reflect
-    - Yes that's right
+    - Yes that's right.
 
 ## label_emotion
 * reflect/label_emotion
-    - Yeah
+    - Yeah you're right. I am. 
+
+## self_disclosure
+* empathy/self_disclosure
+    - Seems you have the same experience as me, could you please give me some advice on how to tackle it?
+
+## offer_condolence
+* empathy/offer_condolence
+    - I'm scared that if she never loved me, maybe no one will. I just want to feel better.
 
 
 ## compassion
 * support/compassion
-    - thanks, I really appreciate that	that's really kind of you	
-    - you're so nice!	thank you, I'm really grateful	
-    - I really appreciate you being here for me	
-    - I'm really grateful for your willingness to listen to me.
+    - Thanks, I really appreciate that	that's really kind of you. I guess the whole thing has just made me extra insecure about myself. 
+
 
 ## understanding
 * support/understanding
-    - Yeah
+    - Yeah it's frustrating because a part of me still wants her back because when I said I loved her, I wasn't lying. Unfortunately can't say the same for her
 
 ## support_user_side
 * support/support_user_side
     - I know, but I still feel frustrated. My heart is broken and I don't know what to do.
 
-## encourage_self
-* affirm/encourage_self	
-    - Thank you for encouraging me
+## no_advice
+* warning/no_advice
+    - I guess the whole thing has just made me extra insecure about myself. 
 
-## affirm
-* affirm/affirm
-    - I guess you're right.   
+## protect_personal_information
+* warning/protect_personal_information
+    - Oh i understand, i'll just talk to you again on 7 cups. 
 
+## listener_privacy
+* inappropriate/listener_privacy
+    - Oh wow, thanks. I know I asked for your contact info but now I'm maybe thinking we should just chat on 7 cups to maintain our privacy.
+
+## inappropriate
+* inappropriate/inappropriate
+    - I don't talk about that. Can we get back to the point? I just want to recover from my breakup as soon as possible.
+
+## end_conversation
+* closing/end_conversation
+    - Oh okay, do you mind giving me your phone number and then we can chat during the weekend? 
+
+## bye
+* closing/bye
+    - Bye then! thanks for chatting with me!

@@ -7,25 +7,28 @@ intents:
 - open_question:
     triggers: respond_open_question
 - facilitate
+- clarification
 - reflect:
     triggers: respond_reflect
-- empathy
-- condolence
+- empathy:
+    triggers: respond_empathy
+- give_advice
 - support:
     triggers: respond_support
-- affirm:
-    triggers: respond_affirm
-- giving_information
-- clarification
-- warning
+- warning:
+    triggers: respond_warning
+- affirm
 - confront
-- inappropriate
-- closing
-- give_advice
-- give_personal_information
+- self_harm
+- giving_information
+- inappropriate:
+    triggers: respond_inappropriate
+- closing: 
+    triggers: respond_closing
+
 responses:
   utter_greeting:
-  - text: Hello. Are you there?
+  - text: Hey, I'm Andrew and I'm here because of a breakup.
   utter_not_great:
   - text: I'm not great.
   utter_introduce_breakup:
@@ -38,17 +41,19 @@ responses:
       she kept reassuring me that she was still interested.
   utter_end_relationship:
   - text: But then she slowly started to distance herself which scared me again.
-  utter_never_loved:
-  - text: I'm scared that if she never loved me, maybe no one will.
-  utter_wanna_better:
-  - text: I just want to feel better.
-  utter_warning:
-  - text: Oh I see. Thank you.
-  utter_inappropriate:
-  - text: This conversation is not helping at all. I don't want to talk to you any
-      more. See you never.
-  utter_no_personal_information:
-  - text: Oh maybe I should not ask that. Thank you though.
+  utter_clarification:
+  - text: You and me both! I'm so confused about how I feel. I still love her but at the same time I'm angry by the way she treated me.
+  utter_advice:
+  - text: Oh wait i just remembered isn't it a rule or something that listeners can't give advice on here lol
+  utter_affirm:
+  - text: I guess you're right. 
+  utter_confront:
+  - text: I still feel hurt though, that doesn't make the pain any less. 
+  utter_suicide:
+  - text: Yeah, I feel so frustrated, there is no need for me to be alive in this world. This break up is killing me.
+  utter_give_information:
+  - text: Thank you so much! I'll definitely look into that! I'll check back later.
+
 actions:
 - utter_greeting
 - utter_not_great
@@ -57,15 +62,16 @@ actions:
 - utter_facilitate_atfirst
 - utter_time_passed
 - utter_end_relationship
-- utter_never_loved
-- utter_wanna_better
+- utter_clarification
 - respond_reflect
-- action_ask_for_advice
-- action_suicide
+- respond_empathy
+- utter_advice
 - respond_support
-- respond_affirm
-- action_ask_personal_info
-- utter_inappropriate
-- utter_warning
+- respond_warning
+- utter_affirm
+- utter_confront
+- utter_suicide
+- utter_give_information
+- respond_closing
+- respond_inappropriate
 - action_my_fallback
-- utter_no_personal_information

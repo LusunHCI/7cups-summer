@@ -10,54 +10,27 @@
   - utter_facilitate_atfirst
   - utter_time_passed
   - utter_end_relationship
+* clarification
+  - utter_clarification
 * reflect
   - respond_reflect
 * empathy
-  - action_ask_for_advice
-* condolence
-  - utter_never_loved
-  - utter_wanna_better
-* warning
-  - utter_warning
-* support
-  - respond_support
-* affirm 
-  - respond_affirm
-* closing
-  - action_ask_personal_info
-* give_personal_information
-  - utter_no_personal_information
-
-## advice suicide path
-* greeting
-  - utter_greeting
-* conventional_opening
-  - utter_not_great
-  - utter_introduce_breakup
-* open_question
-  - respond_open_question
-* facilitate
-  - utter_facilitate_atfirst
-  - utter_time_passed
-  - utter_end_relationship
-* reflect
-  - respond_reflect
-* empathy
-  - action_ask_for_advice
-* condolence
-  - utter_never_loved
-  - utter_wanna_better
+  - respond_empathy
 * give_advice
-  - action_suicide
-* inappropriate
-  - utter_inappropriate
-* giving_information
-  - utter_warning
+  - utter_advice
 * support
   - respond_support
+* warning
+  - respond_warning
 * affirm 
-  - respond_affirm
+  - utter_affirm
+* confront
+  - utter_confront
+* self_harm
+  - utter_suicide
+* giving_information
+  - utter_give_information
 * closing
-  - action_ask_personal_info
-* give_personal_information
-  - utter_no_personal_information
+  - respond_closing
+* inappropriate
+  - respond_inappropriate

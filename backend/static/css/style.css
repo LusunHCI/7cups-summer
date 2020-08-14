@@ -216,6 +216,12 @@ div.chats::-webkit-scrollbar {
     width: 60%;
 }
 
+.noGuide {
+    display: none;
+    float:right;
+    width: 60%;
+}
+
 .yesDesc {
     display: none;
     float:right;

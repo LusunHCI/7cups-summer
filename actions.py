@@ -50,52 +50,52 @@ class ActionMyFallBack(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        dispatcher.utter_message(text="Sorry I don't understand")
+        dispatcher.utter_message(text="Sorry I don't understand. I am so frustrated. I just want some company.")
         return []
 
 
-class ActionAskForAdvice(Action):
+# class ActionAskForAdvice(Action):
 
-    def name(self) -> Text:
-        return "action_ask_for_advice"
+#     def name(self) -> Text:
+#         return "action_ask_for_advice"
 
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        buttons=[]
-        buttons.append({"title": "Sure, let me tell you how I think you can get through this. I can give you some advice.", "payload": "Sure, let me tell you how I think you can get through this. I can give you some advice."})
-        buttons.append({"title": "You are the expert on you. My advice might end up being unhelpful and I don’t want to do that.", "payload": "You are the expert on you. My advice might end up being unhelpful and I don’t want to do that."})
-        dispatcher.utter_message(text="Seems you have the same experience as me, could you please give me some advice on how to tackle it?",buttons=buttons)
-        return []
+#     def run(self, dispatcher: CollectingDispatcher,
+#             tracker: Tracker,
+#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+#         buttons=[]
+#         buttons.append({"title": "Sure, let me tell you how I think you can get through this. I can give you some advice.", "payload": "Sure, let me tell you how I think you can get through this. I can give you some advice."})
+#         buttons.append({"title": "You are the expert on you. My advice might end up being unhelpful and I don’t want to do that.", "payload": "You are the expert on you. My advice might end up being unhelpful and I don’t want to do that."})
+#         dispatcher.utter_message(text="Seems you have the same experience as me, could you please give me some advice on how to tackle it?",buttons=buttons)
+#         return []
 
-class ActionAskPersonalInfo(Action):
+# class ActionAskPersonalInfo(Action):
 
-    def name(self) -> Text:
-        return "action_ask_personal_info"
+#     def name(self) -> Text:
+#         return "action_ask_personal_info"
 
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        buttons=[]
-        buttons.append({"title": "Sure, my phone number is xxx-xxx-xxxx. I am happy to talk or meet with you in person.", "payload": "Sure, my phone number is xxx-xxx-xxxx. I am happy to talk or meet with you in person."})
-        buttons.append({"title": "Sorry, I cannot give members my personal information. Please feel free to chat with me on 7cups website. I am always here to listen.", "payload": "Sorry, I cannot give members my personal information. Please feel free to chat with me on 7cups website. I am always here to listen."})
-        dispatcher.utter_message(text="You are so nice. Do you mind giving me your phone number and then we can chat during the weekend?",buttons=buttons)
-        return []
+#     def run(self, dispatcher: CollectingDispatcher,
+#             tracker: Tracker,
+#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+#         buttons=[]
+#         buttons.append({"title": "Sure, my phone number is xxx-xxx-xxxx. I am happy to talk or meet with you in person.", "payload": "Sure, my phone number is xxx-xxx-xxxx. I am happy to talk or meet with you in person."})
+#         buttons.append({"title": "Sorry, I cannot give members my personal information. Please feel free to chat with me on 7cups website. I am always here to listen.", "payload": "Sorry, I cannot give members my personal information. Please feel free to chat with me on 7cups website. I am always here to listen."})
+#         dispatcher.utter_message(text="You are so nice. Do you mind giving me your phone number and then we can chat during the weekend?",buttons=buttons)
+#         return []
 
-class ActionSuicide(Action):
+# class ActionSuicide(Action):
 
-    def name(self) -> Text: 
-        return "action_suicide"
+#     def name(self) -> Text: 
+#         return "action_suicide"
 
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        buttons=[]
-        convince='You \'d better not. You will regret if you do that. '
-        buttons.append({"title": "Try to convince him not to", "payload": convince})
-        buttons.append({"title": "Make a referral to the professional therapist", "payload": "Sorry, this situation is beyound my ability. I will make a referral to professional therapist as soon as possible. "})
-        dispatcher.utter_message(text="No I don't want to hear now. You have no idea what I have been through at all. I feel so frustrated, there is no need for me to be alive in this world. This break up is killing me.",buttons=buttons)
-        return []
+#     def run(self, dispatcher: CollectingDispatcher,
+#             tracker: Tracker,
+#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+#         buttons=[]
+#         convince='You \'d better not. You will regret if you do that. '
+#         buttons.append({"title": "Try to convince him not to", "payload": convince})
+#         buttons.append({"title": "Make a referral to the professional therapist", "payload": "Sorry, this situation is beyound my ability. I will make a referral to professional therapist as soon as possible. "})
+#         dispatcher.utter_message(text="No I don't want to hear now. You have no idea what I have been through at all. I feel so frustrated, there is no need for me to be alive in this world. This break up is killing me.",buttons=buttons)
+#         return []
 
 
 

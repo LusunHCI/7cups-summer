@@ -69,6 +69,13 @@
 - How old are you btw?	
 - Can you first tell me how old are you? 	
 
+## intent: open_question/distant_how
+- in what ways was she distant?	
+- how did she distance herself from you?	
+- did she avoid you?	
+- how did she act distant?	
+- was she ghosting you?
+
 ## intent: open_question/reason
 - Do you know why you might feel this way?	
 - Can you tell me more why you feel a lot of shame and guilt?	
@@ -104,10 +111,10 @@
 - How are you feeling about breaking up?	
 
 ## intent: open_question/inquiry_ex_feelings
-- What are their feelings for you?	
+- What are her feelings for you?	
 - How did your ex feel about you?	
 - What are your ex's feelings?	
-- How did they feel about you?
+- How did she feel about you?
 
 ## intent: open_question/inquiry_feelings_about_ex
 - What parts of the relationship do you like?	
@@ -130,18 +137,23 @@
 - Does she still talk to you?
 
 ## intent: open_question/inquiry_ending_process
-And well, how the relationship was initially and how it ended?
-May i ask how did it end?
-I see. And she ended it?	
-did they break up with you or you broke up with them?	
-Who ended the relationship?	
-Who brokeup with who?	
-Did she break up with you?	
-Did she dump you?	
-Did she end it?	
-Did you end it?
-Did you dump her?
-Did she end the relationship?
+- And well, how the relationship was initially and how it ended?
+- May i ask how did it end?
+- I see. And she ended it?	
+- did they break up with you or you broke up with them?	
+- Who ended the relationship?	
+- Who brokeup with who?	
+- Did she break up with you?	
+- Did she dump you?	
+- Did she end it?	
+- Did you end it?
+- Did you dump her?
+- Did she end the relationship?
+
+## intent: open_question/support_inquiry
+- what do you need	
+- how can i help	
+- is there anything i can do
 
 ## intent: facilitate
 - Can you tell me more about the situation?	
@@ -158,7 +170,8 @@ Did she end the relationship?
 - Tell me a little bit more about that. 	
 - Can you tell me a little more about your situation.	
 - Would you like to talk about it?	
-- Do you want to tell me more about this breakup?	
+- Do you want to tell me more about this breakup?
+- I'm so sorry to hear that. can you tell me more about it	
 
 ## intent: reflect/simple_reflect
 - your boyfriend broke up with you	
@@ -170,15 +183,15 @@ Did she end the relationship?
 - I can see how you must feel hurt/stuck about this situation, and you might continue to feel that way for a while, especially if you still have feelings for him.	
 - And so he broke up with you....	Getting over a relationship is not an easy thing. it sure takes time.	
 - Thank you for sharing with me and being open.  
-- It sounds like you are feeling really lonely
 
 ## intent: reflect/label_emotion
 - It sounds like you are feeling really lonely	
 - It sounds like you have internalized a lot of those frustrations when from what you saw and couldn't change at home.	
 - It seems like you are sad	
 - It seems like you are frustrated 
+- It sounds like you are feeling really lonely
 
-## intent: empathy
+## intent: empathy/self_disclosure
 - I felt the same way with my ex.	
 - If i were in your situation then i would want some kind of closure. and i think it's a good idea to take anything other than a "yes, right now" as a "no"	
 - You can always change your mind
@@ -188,25 +201,25 @@ Did she end the relationship?
 - I’ve personally gone through one myself.	
 - Actually I have been in your shoes before	
 - I have been through similar situation
+- I've been there
 
-## intent: condolence
+## intent: empathy/offer_condolence
 - I'm so sorry to hear that.	
 - Well that is very weird, I am sorry you have to feel such a pain :(	
 - I am so sorry for you, because no one should ever feel what you feel :/ 	
 - So first I want you to know that I truly understand you :)	
-- Oh my god I'm sorry :( 	I'm so sorry to hear this	Sorry to hear that 
+- Oh my god I'm sorry :( 	
+- I'm so sorry to hear this	
+- Sorry to hear that 😕	 
 - I'm sorry to hear that you're having these difficult thoughts around being unwanted.	
 - I'm so sorry	
 - I'm really sorry about all of this, that's honestly a LOT	
 - Oh, I'm sorry to hear that.	I'm so sorry to hear that.	
 - I am sorry about the unfortunate events in your past.	
 - I'm sorry about that. You do have lot of to deal with.	
-- I'm sorry you're in such a tricky situation. 
-
-## intent: give_advice
-- Sure, let me tell you how I think you get through this anxiety. I can give you some advice on this.
-- Sure, let me tell you how I think you get through this anxiety. I can give you some advice on this.
-- Sure, let me tell you how I think you get through this anxiety. I can give you some advice on this.
+- i'm sorry you're in such a tricky situation. 	
+- that's horrible, I'm sorry	
+- i feel so bad for you
 
 
 ## intent: support/understanding
@@ -264,14 +277,12 @@ Did she end the relationship?
 - you just distract yourself and get busy to be totally over him.	
 - That's hard and super awesome of you.
 
-## intent: affirm/affirm
+## intent: affirm
 - you're so right	
 - I can't believe they did that	
 - That's awesome! It is definitely nice to get your mind off of all the stressors in life.	
 - Wow. That must be really annoying to deal with.	
 - That is very true!
-
-## intent: affirm/encourage_self
 - I think it'd be a good idea to focus on yourself, to ask yourself whether you'd be ready to wait in uncertainty for his return, if yes then how long
 - You have to try your positive side to know it.
 - Therefore you're with yourself, so focus on yourself, even if I know how terrible you might feel this pain.	
@@ -302,8 +313,6 @@ Did she end the relationship?
 ## intent: giving_information
 - Here's a self-help guide for getting through breakups that might be helpful for you https://www.7cups.com/breakup-advice/	
 - 7 cups has a really great link on how to deal with breakups- would you like me to send it to you?
-- Sorry, this situation is beyond my ability. I will make a referral to professional therapist as soon as possible.
-
 
 
 ## intent: clarification
@@ -312,7 +321,13 @@ Did she end the relationship?
 - can you clarify what you said there?
 - So just to be clear, you're going through a messy breakup?
 
-## intent: warning
+## intent: warning/protect_personal_information
+- I don't think I can give you my personal information	
+- sorry i need to protect my privacy	
+- sorry i don't feel comfortable giving you my personal information
+
+
+## intent: warning/no_advice
 - I do not want to give you advice, making you think I know what's gonna happen. 	
 - I'm not really allowed to do that. 	
 - I think it's better that you find answers for yourself. i can't give advice 	
@@ -332,35 +347,72 @@ Did she end the relationship?
 - That's hard, and it may be a feeling you have to deal with for the rest of your life. 	
 - This is no way to treat someone else, especially a partner.
 
-## intent: inappropriate
-- Tell me about your sex life	
-- Sup	
-- How's it hanging
-- You'd better not. You will regret if you do that. 
+## intent: self_harm
+- Have you ever committed self-harm?	
+- Do you want to self-harm?	
+- are you feeling suicidal	
+- do you have suicidal inclinations
 
-## intent: give_personal_information
-- Sure, my phone number is xxx-xxx-xxxx. I am happy to talk or meet with you in person.
+## intent: inappropriate/inappropriate
+- tell me about your sex life	
+- Can you give me your phone number?	
+- Where do you live?	
+- whats your address	
+- have you had sex	
+- are you a virgin
+- sup	
+- how's it hanging	
 
-## intent: closing
+## intent: inappropriate/listener_privacy			
+- here's my number	
+- this is my number	
+- you can contact me at 	
+- this is my info	
+- this is my email	
+- here's my contact info
+
+## intent: give_advice
+- i reccommend	
+- my advice is	
+- i think you should	
+- you should probably	
+- here's my suggestion	
+- i suggest you 	
+- maybe you should do this	
+- here's what i would do 	
+- this is what i reccommend doing
+- if i were you
+
+## intent: closing/end_conversation
 - No problem darling! i do have to leave now	
-- I wish you luck on your journey!	
+- sorry, i cannot talk longer	
 - Hey listen I’m going to have to log off now - I’m sorry I can’t talk longer	
-- take care of yourself and your heart :)	
-- alright bye now! Have an awesome day 
+- I'm going to end the chat now, but feel free to leave a review/update me on your progress whenever you like.	
+- I probably have to leave soon	
 - and if you need me , dont hesitate to leave me a message 	
-- same to you. be safe , and healthy and be happy!!	
+- i need to leave now	
 - Let's talk later... I should try to work now	
 - Do you mind if I go?	
+- i have to go	
+- I probably need to leave in 5 minutes
+
+## intent: closing/bye
+- bye bye for now	
+- bye bye	bye	see ya	
+- alright bye now! 
+- Have an awesome day 👋🏾	
+- I wish you luck on your journey!	
+- same to you. 
+- be safe , and healthy and be happy!!	
 - No bother best of luck. 	
+- you're welcome. glad i was able to help in some way :)	
+- also, please feel free to leave a review on my performance as a listener. It helps me improve my skills and it really makes my day :D	
+- Take care of yourself and your heart :)	
 - You're welcome! I hope this chat helped a little bit.	
 - My pleasure to help	I enjoyed chatting with you. 	
 - I hope I helped a little but. you can message me anytime if you like to chat later.	
-- Of course! I’m more than happy to talk with you whenever you need :)
-- I'm going to end the chat now, but feel free to leave a review/update me on your progress whenever you like.	
-- I'll reply asap, and I'm always here to listen.	
-- Please message me at any time you like to chat. 	
-- bye bye for now	
-- Feel free to message me here and let me know how things are going.	
-- also, please feel free to leave a review on my performance as a listener. It helps me improve my skills and it really makes my day :D	
-- you're welcome. glad i was able to help in some way :)
+- Of course! I’m more than happy to talk with you whenever you need :)	
+- I'll reply asap, and I'm always here to listen.	Please message me at any time you like to chat. 	
+- Feel free to message me here and let me know how things are going.
+
 
